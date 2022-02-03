@@ -1,4 +1,5 @@
 // frontend/src/index.js
+// test comment for git renamed repository
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
