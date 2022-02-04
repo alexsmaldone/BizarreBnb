@@ -6,6 +6,20 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
     {
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 30],
+        },
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [2, 30],
+        },
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -79,6 +93,8 @@ module.exports = (sequelize, DataTypes) => {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,
+      firstName,
+      lastName,
       email,
       hashedPassword,
     });
@@ -86,7 +102,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = function (models) {
-    // associations can be defined here
+    User.hasMany(models.Listing, { foreignKey: "userId" });
+    User.hasMany(models.Review, { foreignKey: "userId" });
   };
 
   return User;
