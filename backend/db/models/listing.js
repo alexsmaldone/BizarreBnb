@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       state: DataTypes.STRING,
-      zipcode: DataTypes.NUMERIC,
+      zipcode: DataTypes.STRING(10),
       country: {
         allowNull: false,
         type: DataTypes.STRING,
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       bath: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.ZEROFILL,
       },
     },
     {}

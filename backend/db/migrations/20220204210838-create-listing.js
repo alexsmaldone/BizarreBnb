@@ -25,7 +25,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       zipcode: {
-        type: Sequelize.NUMERIC,
+        type: Sequelize.STRING(10),
       },
       country: {
         allowNull: false,
@@ -59,7 +59,7 @@ module.exports = {
       },
       bath: {
         allowNull: false,
-        type: Sequelize.INTEGER,
+        type: Sequelize.INTEGER.ZEROFILL,
       },
       createdAt: {
         allowNull: false,

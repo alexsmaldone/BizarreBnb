@@ -16,7 +16,7 @@ module.exports = {
           address: "9501 Amherst Ave",
           city: "Margate City",
           state: "New Jersey",
-          zipcode: 08402,
+          zipcode: "08402",
           country: "USA",
           name: "An Elephant-sized Stay",
           description:
@@ -33,7 +33,7 @@ module.exports = {
           address: "1103 Biscayne Blvd",
           city: "Miami",
           state: "Florida",
-          zipcode: 33132,
+          zipcode: "33132",
           country: "USA",
           name: "UFO 'Futuro styled Flying Saucer!",
           description:
@@ -50,7 +50,7 @@ module.exports = {
           address: "1200 Getty Center Dr",
           city: "Los Angeles",
           state: "California",
-          zipcode: 90049,
+          zipcode: "90049",
           country: "USA",
           name: "The Boot - Fairytale Accommodation",
           description:
@@ -67,7 +67,7 @@ module.exports = {
           address: "1280 Peachtree St NE",
           city: "Atlanta",
           state: "Georgia",
-          zipcode: 30309,
+          zipcode: "30309",
           country: "USA",
           name: "Secluded Intown Treehouse",
           description:
@@ -84,7 +84,7 @@ module.exports = {
           address: "294 Sandhill Rd",
           city: "Page",
           state: "Arizona",
-          zipcode: 86040,
+          zipcode: "86040",
           country: "USA",
           name: "Sheep Wagon 2 Glamping at Shash Dine",
           description:
