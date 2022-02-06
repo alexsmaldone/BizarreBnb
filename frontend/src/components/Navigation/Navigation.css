@@ -1,17 +1,26 @@
 .nav-wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #222222;
   color: #ffffff;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Montserrat", sans-serif;
+}
+
+.nav-logo-links {
+  display: flex;
+  align-items: center;
 }
 
 .fa-airbnb {
   color: #ffffff;
+  font-size: 30px;
 }
 .logo-text {
   color: #ffffff;
   text-decoration: none;
+  font-size: 20px;
+  margin-left: 5px;
 }
 
 ul.nav-dropdown {
@@ -20,10 +29,56 @@ ul.nav-dropdown {
 }
 
 #profile-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   background-color: #ffffff;
   border-radius: 21px !important;
-  height: 42px !important;
+  height: 35px !important;
   padding: 5px 5px 5px 12px !important;
-  position: relative;
   border: 1px solid #dddddd !important;
+}
+
+.fa-bars {
+  font-size: 15px;
+}
+.fa-user-circle {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.profile-dropdown {
+  padding-inline-start: 10px;
+  position: absolute;
+  list-style: none;
+  margin-left: -100px;
+  border-radius: 21px;
+  padding: 10px 10px;
+  color: #222222;
+  background-color: #ffffff;
+  text-decoration: none;
+  border: 1px solid #dddddd !important;
+}
+
+.profile-dropdown li {
+  font-size: 16px;
+  margin-top: 5px;
+}
+.profile-dropdown li:hover {
+  opacity: 60%;
+}
+
+.profile-dropdown a {
+  text-decoration: none;
+  color: #222222;
+}
+
+.profile-dropdown button {
+  color: #222222;
+  background-color: inherit;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: inherit;
+  cursor: pointer;
 }

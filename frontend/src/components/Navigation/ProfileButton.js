@@ -45,8 +45,7 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && sessionUser && (
         <ul className="profile-dropdown">
-          <li>Welcome, {user.firstName}</li>
-          <li>Link to My Listings</li>
+          <li>My Listings</li>
           <li>
             <a
               href="https://github.com/alexsmaldone/BizarreBnb"
