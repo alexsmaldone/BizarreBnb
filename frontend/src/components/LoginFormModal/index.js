@@ -8,9 +8,21 @@ function LoginFormModal() {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Log In</button>
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          setShowModal(true);
+        }}
+        type="button"
+      >
+        Log In
+      </button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal
+          onClose={(e) => {
+            setShowModal(false);
+          }}
+        >
           <LoginForm />
         </Modal>
       )}

@@ -1,43 +1,49 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
+import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
-  console.log(user);
   const [showMenu, setShowMenu] = useState(false);
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
+  const toggleMenu = (e) => {
+    showMenu ? setShowMenu(false) : setShowMenu(true);
   };
 
   useEffect(() => {
-    if (!showMenu) return;
+    setShowMenu(false);
+  }, []);
 
-    const closeMenu = () => {
-      setShowMenu(false);
-    };
+  // useEffect(() => {
+  //   if (!showMenu) return;
 
-    document.addEventListener("click", closeMenu);
+  //   const closeMenu = (e) => {
+  //     setShowMenu(false);
+  //   };
 
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  //   profileButton.addEventListener("click", closeMenu);
+
+  //   return () => profileButton.removeEventListener("click", closeMenu);
+  // }, [showMenu]);
 
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    setShowMenu(false);
   };
 
   return (
     <>
-      <button onClick={openMenu}>
+      <button id="profile-button" onClick={toggleMenu}>
+        <i className="fas fa-bars" />
         <i className="fas fa-user-circle" />
       </button>
-      {showMenu && (
+      {showMenu && sessionUser && (
         <ul className="profile-dropdown">
           <li>Welcome, {user.firstName}</li>
           <li>Link to My Listings</li>
@@ -52,6 +58,25 @@ function ProfileButton({ user }) {
           </li>
           <li>
             <button onClick={logout}>Log Out</button>
+          </li>
+        </ul>
+      )}
+      {showMenu && !sessionUser && (
+        <ul className="profile-dropdown">
+          <li>
+            <LoginFormModal />
+          </li>
+          <li>
+            <NavLink to="/signup">Sign Up</NavLink>
+          </li>
+          <li>
+            <a
+              href="https://github.com/alexsmaldone/BizarreBnb"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Contact Us
+            </a>
           </li>
         </ul>
       )}

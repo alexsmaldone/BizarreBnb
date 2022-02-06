@@ -9,27 +9,34 @@ import "./Navigation.css";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = <ProfileButton user={sessionUser} />;
-  } else {
-    sessionLinks = (
-      <>
-        <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
-    );
-  }
+  let sessionLinks = <ProfileButton user={sessionUser} />;
+  // if (sessionUser) {
+  //   sessionLinks = <ProfileButton user={sessionUser} />;
+  // } else {
+  //   sessionLinks = (
+  //     <>
+  //       <LoginFormModal />
+  //       <NavLink to="/signup">Sign Up</NavLink>
+  //     </>
+  //   );
+  // }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">
-          Home
-        </NavLink>
-        {isLoaded && sessionLinks}
-      </li>
-    </ul>
+    <>
+      <nav className="nav-wrapper">
+        <div className="nav-logo-links">
+          <NavLink exact to="/">
+            <i className="fab fa-airbnb" />
+          </NavLink>
+          <NavLink className="logo-text" exact to="/">
+            BizzareBnB
+          </NavLink>
+        </div>
+        <ul className="nav-dropdown">
+          <li>{isLoaded && sessionLinks}</li>
+        </ul>
+      </nav>
+    </>
   );
 }
 

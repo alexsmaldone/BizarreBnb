@@ -1,0 +1,29 @@
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  background-color: #222222;
+  color: #ffffff;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.fa-airbnb {
+  color: #ffffff;
+}
+.logo-text {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+ul.nav-dropdown {
+  list-style: none;
+  padding-inline-start: 0;
+}
+
+#profile-button {
+  background-color: #ffffff;
+  border-radius: 21px !important;
+  height: 42px !important;
+  padding: 5px 5px 5px 12px !important;
+  position: relative;
+  border: 1px solid #dddddd !important;
+}
