@@ -1,11 +1,13 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import "./Navigation.css";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
+  const sessionUser = useSelector((state) => state.session.user);
+  console.log(user);
   const [showMenu, setShowMenu] = useState(false);
 
   const openMenu = () => {
@@ -37,8 +39,17 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && (
         <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
+          <li>Welcome, {user.firstName}</li>
+          <li>Link to My Listings</li>
+          <li>
+            <a
+              href="https://github.com/alexsmaldone/BizarreBnb"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Contact Us
+            </a>
+          </li>
           <li>
             <button onClick={logout}>Log Out</button>
           </li>
