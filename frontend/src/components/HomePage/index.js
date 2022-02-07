@@ -4,6 +4,8 @@ import { NavLink, Route, useParams } from "react-router-dom";
 import "./HomePage.css";
 
 const splashPage = () => {
+  const dispatch = useDispatch();
+
   return (
     <main>
       <div className="splash-top">

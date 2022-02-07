@@ -17,7 +17,17 @@ export const getListings = () => async (dispatch) => {
 const listingsReducer = (state = {}, action) => {
   switch (action.type) {
     case LOAD: {
+      const allListings = {};
+      action.listings.forEach((listing) => {
+        allListings[listing.id] = listing;
+      });
+      return {
+        ...allListings,
+        ...state,
+      };
     }
+    default:
+      return state;
   }
 };
 
