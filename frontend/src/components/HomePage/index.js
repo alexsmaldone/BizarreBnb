@@ -1,10 +1,20 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Route, useParams } from "react-router-dom";
+import { getListings } from "../../store/listing";
+
 import "./HomePage.css";
 
-const splashPage = () => {
+const SplashPage = () => {
   const dispatch = useDispatch();
+  const listings = useSelector((state) => {
+    return state.listing.list;
+  });
+
+  useEffect(() => {
+    dispatch(getListings());
+  }, [dispatch]);
+  console.log(listings);
 
   return (
     <main>
@@ -24,4 +34,4 @@ const splashPage = () => {
   );
 };
 
-export default splashPage;
+export default SplashPage;

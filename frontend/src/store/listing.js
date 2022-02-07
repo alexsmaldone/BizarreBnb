@@ -14,7 +14,11 @@ export const getListings = () => async (dispatch) => {
   }
 };
 
-const listingsReducer = (state = {}, action) => {
+const initialState = {
+  list: [],
+};
+
+const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
       const allListings = {};
@@ -24,6 +28,7 @@ const listingsReducer = (state = {}, action) => {
       return {
         ...allListings,
         ...state,
+        list: action.listings,
       };
     }
     default:
