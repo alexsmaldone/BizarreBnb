@@ -16,19 +16,22 @@ export const getListings = () => async (dispatch) => {
 
 const initialState = {
   list: [],
+  images: [],
 };
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD: {
       const allListings = {};
-      action.listings.forEach((listing) => {
+
+      action.listings[0].forEach((listing) => {
         allListings[listing.id] = listing;
       });
       return {
         ...allListings,
         ...state,
-        list: action.listings,
+        list: action.listings[0],
+        images: action.listings[1],
       };
     }
     default:
