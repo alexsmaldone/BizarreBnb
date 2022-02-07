@@ -1,6 +1,7 @@
 .signup-container {
   position: absolute;
-  top: 100px;
+  z-index: 1;
+  top: 150px;
   width: 100%;
   display: flex;
   justify-content: center;

@@ -6,10 +6,18 @@ import "./HomePage.css";
 const splashPage = () => {
   return (
     <main>
-      <div className="background-image-container">
-        <img src="https://a0.muscache.com/im/pictures/9b731de6-b8b6-4eae-aba2-631216bf1bfc.jpg?im_w=1200" />
+      <div className="splash-top">
+        <h1 className="welcome">Welcome to BizarreBnB</h1>
+        <p className="welcome">
+          Browse and book the quirkiest collection of BnB's on the internet
+        </p>
+        <div className="background-image-container">
+          <img
+            src="https://a0.muscache.com/im/pictures/9b731de6-b8b6-4eae-aba2-631216bf1bfc.jpg?im_w=1200"
+            alt="home in the shape of a boot"
+          />
+        </div>
       </div>
-      <h1 className="welcome">Welcome to BizarreBnB</h1>
     </main>
   );
 };
