@@ -14,6 +14,12 @@ const SplashPage = () => {
     return state.listing.images;
   });
 
+  /*
+  - create new obj
+  - iterate over currernt array of objects,
+  - create new object
+  */
+
   useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
@@ -42,8 +48,11 @@ const SplashPage = () => {
         <div className="listings-container">
           {listings.map((listing) => {
             return (
-              <div key={listing.id}>
-                <h4>{listing.name}</h4>
+              <div className="card-container" key={listing.id}>
+                <h4 className="listing-name">{listing.name}</h4>
+                <div className="listing-img-container">
+                  <img src={images[listing.id][0]} alt={listing.name} />
+                </div>
                 <h6>
                   {listing.city}, {listing.state}
                 </h6>
