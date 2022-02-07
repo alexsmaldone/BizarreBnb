@@ -1,8 +1,14 @@
-const LOAD = "listings/LOAD";
+const LOAD_ALL = "listings/LOAD_ALL";
+const LOAD_ONE = "listings/LOAD_ONE";
 
-const load = (listings) => ({
-  type: LOAD,
+const loadAll = (listings) => ({
+  type: LOAD_ALL,
   listings,
+});
+
+const loadOne = (listing) => ({
+  type: LOAD_ONE,
+  listing,
 });
 
 export const getListings = () => async (dispatch) => {
@@ -10,7 +16,16 @@ export const getListings = () => async (dispatch) => {
 
   if (response.ok) {
     const listings = await response.json();
-    dispatch(load(listings));
+    dispatch(loadAll(listings));
+  }
+};
+
+export const getOneListing = (id) => async (dispatch) => {
+  const response = await fetch(`/api/listings/${id}`);
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(loadOne(listing));
   }
 };
 
@@ -21,7 +36,7 @@ const initialState = {
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case LOAD: {
+    case LOAD_ALL: {
       const allListings = {};
       const imagesArray = action.listings[1];
       const imagesObj = {};
@@ -42,6 +57,14 @@ const listingsReducer = (state = initialState, action) => {
         ...state,
         list: action.listings[0],
         images: imagesObj,
+      };
+    }
+
+    case LOAD_ONE: {
+      return {
+        ...state,
+        list: action.listing[0],
+        images: action.listing[1],
       };
     }
     default:

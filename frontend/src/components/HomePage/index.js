@@ -53,7 +53,7 @@ const SplashPage = () => {
                 <div className="listing-img-container">
                   <img src={images[listing.id][0]} alt={listing.name} />
                 </div>
-                <h6>
+                <h6 className="listing-location">
                   {listing.city}, {listing.state}
                 </h6>
               </div>
