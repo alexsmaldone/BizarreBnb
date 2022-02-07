@@ -7,16 +7,38 @@ import "./ListingDetail.css";
 
 const ListingDetail = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { listingId } = useParams();
+
+  const listing = useSelector((state) => state?.listing?.list[0]);
+
+  const images = useSelector((state) => state?.listing?.list[1]);
 
   useEffect(() => {
-    dispatch(getOneListing(id));
+    dispatch(getOneListing(Number(listingId)));
   }, [dispatch]);
 
+  if (!listing || !images) {
+    return null;
+  }
+
   return (
-    <div>
-      <h1>Hello listing detail</h1>
-    </div>
+    <main className="listing-detail">
+      <div>
+        <h1>{listing?.name}</h1>
+        <div className="review-container"></div>
+        <div className="image-container">
+          <div className="image-card">
+            <img src={images[0].url} />
+          </div>
+          <div className="image-card">
+            <img src={images[1].url} />
+          </div>
+          <div className="image-card">
+            <img src={images[2].url} />
+          </div>
+        </div>
+      </div>
+    </main>
   );
 };
 

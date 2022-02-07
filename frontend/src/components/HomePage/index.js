@@ -14,12 +14,6 @@ const SplashPage = () => {
     return state.listing.images;
   });
 
-  /*
-  - create new obj
-  - iterate over currernt array of objects,
-  - create new object
-  */
-
   useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
