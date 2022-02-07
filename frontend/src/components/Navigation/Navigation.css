@@ -1,4 +1,6 @@
 .nav-wrapper {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +12,7 @@
 .nav-logo-links {
   display: flex;
   align-items: center;
+  padding-left: 20px;
 }
 
 .fa-airbnb {
@@ -26,6 +29,7 @@
 ul.nav-dropdown {
   list-style: none;
   padding-inline-start: 0;
+  padding-right: 20px;
 }
 
 #profile-button {
