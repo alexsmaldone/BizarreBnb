@@ -8,6 +8,7 @@ import "./NewListingForm.css";
 function NewListingForm() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -56,90 +57,102 @@ function NewListingForm() {
     }
   };
 
+  if (!sessionUser.id) {
+    return null;
+  }
+
   return (
-    <main>
-      <h1>New Listing Form</h1>
-      <section>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Address - '1122 Boogie Woogie Ave'"
-            required
-            value={address}
-            onChange={updateAddress}
-          />
-          <input
-            type="text"
-            placeholder="City"
-            required
-            value={city}
-            onChange={updateCity}
-          />
-          <input
-            type="text"
-            placeholder="State"
-            value={state}
-            onChange={updateState}
-          />
-          <input
-            type="text"
-            placeholder="Zipcode"
-            required
-            value={zipcode}
-            onChange={updateZipcode}
-          />
-          <input
-            type="text"
-            placeholder="Country"
-            required
-            value={country}
-            onChange={updateCountry}
-          />
-          <input
-            type="text"
-            placeholder="Listing Title"
-            required
-            value={name}
-            onChange={updateName}
-          />
-          <textarea
-            type="text"
-            placeholder="Description of listing..."
-            required
-            value={description}
-            onChange={updateDescription}
-          />
-          <input
-            type="number"
-            placeholder="Price per night"
-            required
-            value={price}
-            onChange={updatePrice}
-          />
-          <input
-            type="number"
-            placeholder="Number of Guests"
-            required
-            value={guests}
-            onChange={updateGuests}
-          />
-          <input
-            type="number"
-            placeholder="Number of Bedrooms"
-            required
-            value={bedroom}
-            onChange={updateBedroom}
-          />
-          <input
-            type="number"
-            placeholder="Number of bathrooms"
-            required
-            value={bath}
-            onChange={updateBath}
-          />
-          <button type="submit">Create New Listing</button>
-        </form>
-      </section>
+    <main className="newlisting-container">
+      <div className="newlisting-subcontainer">
+        <h1>New Listing Form</h1>
+        <section>
+          <form className="listing-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Listing Title"
+              required
+              value={name}
+              onChange={updateName}
+            />
+            <input
+              type="text"
+              placeholder="Address - '1122 Boogie Woogie Ave'"
+              required
+              value={address}
+              onChange={updateAddress}
+            />
+            <input
+              type="text"
+              placeholder="City"
+              required
+              value={city}
+              onChange={updateCity}
+            />
+            <input
+              type="text"
+              placeholder="State"
+              value={state}
+              onChange={updateState}
+            />
+            <input
+              type="text"
+              placeholder="Zipcode"
+              required
+              value={zipcode}
+              onChange={updateZipcode}
+            />
+            <input
+              type="text"
+              placeholder="Country"
+              required
+              value={country}
+              onChange={updateCountry}
+            />
+            <input
+              type="number"
+              min="0"
+              placeholder="$ Price per night"
+              required
+              value={price}
+              onChange={updatePrice}
+            />
+            <input
+              type="number"
+              placeholder="Number of Guests"
+              min="1"
+              required
+              value={guests}
+              onChange={updateGuests}
+            />
+            <input
+              type="number"
+              min="0"
+              placeholder="Number of Bedrooms"
+              required
+              value={bedroom}
+              onChange={updateBedroom}
+            />
+            <input
+              type="number"
+              min="0"
+              placeholder="Number of bathrooms"
+              required
+              value={bath}
+              onChange={updateBath}
+            />
+            <textarea
+              type="text"
+              placeholder="Description of listing..."
+              required
+              value={description}
+              onChange={updateDescription}
+            />
+            <button className="newlisting-button" type="submit">
+              Create New Listing
+            </button>
+          </form>
+        </section>
+      </div>
     </main>
   );
 }
