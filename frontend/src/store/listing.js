@@ -31,11 +31,11 @@ export const getOneListing = (id) => async (dispatch) => {
 };
 
 export const getMyListings = (userId) => async (dispatch) => {
-  const response = await fetch(`/api/listings/my-listings/${userId}`);
+  const response = await fetch(`/api/listings/my-listings`);
 
   if (response.ok) {
     const listing = await response.json();
-    dispatch(addOneListing(listing));
+    dispatch(load(listing));
     return listing;
   }
 };

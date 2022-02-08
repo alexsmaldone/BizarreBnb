@@ -17,7 +17,6 @@ const SplashPage = () => {
   useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
-  console.log(images);
 
   return (
     <main>
@@ -42,7 +41,7 @@ const SplashPage = () => {
         <div className="listings-container">
           {listings.map((listing) => {
             return (
-              <Link key={listing.id} to={`listings/${listing.id}`}>
+              <Link key={listing.id} to={`/listings/${listing.id}`}>
                 <div className="card-container">
                   <h4 className="listing-name">{listing.name}</h4>
                   <div className="listing-img-container">

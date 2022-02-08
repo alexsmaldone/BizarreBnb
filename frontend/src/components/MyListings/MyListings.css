@@ -1,0 +1,11 @@
+.page-container {
+  position: absolute;
+  top: 80px;
+  margin: auto;
+  padding: 0 200px;
+  color: black;
+}
+
+.card-container:hover {
+  background-color: rgb(240, 237, 233);
+}

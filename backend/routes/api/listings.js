@@ -10,24 +10,16 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const listings = await Listing.findAll();
-    const images = await Image.findAll();
-    return res.json([listings, images]);
+    return res.json([listings]);
   })
 );
 
 router.get(
-  "/my-listings/:id(\\d+)",
+  "/my-listings",
   asyncHandler(async (req, res) => {
-    const userId = parseInt(req.params.id, 10);
-
-    const listing = await Listing.findByPk(id);
-    const listingImages = await Image.findAll({
-      where: {
-        listingId: id,
-      },
-    });
-
-    return res.json([listing, listingImages]);
+    const listings = await Listing.findAll();
+    const images = await Image.findAll();
+    return res.json([listings, images]);
   })
 );
 router.get(

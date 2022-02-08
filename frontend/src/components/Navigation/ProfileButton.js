@@ -1,12 +1,13 @@
 // frontend/src/components/Navigation/ProfileButton.js
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 import "./Navigation.css";
 
 function ProfileButton({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [showMenu, setShowMenu] = useState(false);
@@ -35,6 +36,7 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     setShowMenu(false);
+    history.push("/");
   };
 
   return (
@@ -45,7 +47,9 @@ function ProfileButton({ user }) {
       </button>
       {showMenu && sessionUser && (
         <ul className="profile-dropdown">
-          <li>My Listings</li>
+          <li>
+            <NavLink to="/listings/my-listings">My Listings</NavLink>
+          </li>
           <li>
             <a
               href="https://github.com/alexsmaldone/BizarreBnb"
