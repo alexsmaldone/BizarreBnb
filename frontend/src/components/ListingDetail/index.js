@@ -17,6 +17,10 @@ const ListingDetail = () => {
     dispatch(getOneListing(Number(listingId)));
   }, [dispatch, listingId]);
 
+  useEffect(() => {
+    dispatch(getOneListing(Number(listingId)));
+  }, []);
+
   if (!listing || !images) {
     return null;
   }

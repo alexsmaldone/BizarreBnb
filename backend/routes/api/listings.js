@@ -10,7 +10,8 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const listings = await Listing.findAll();
-    return res.json([listings]);
+    const images = await Image.findAll();
+    return res.json([listings, images]);
   })
 );
 

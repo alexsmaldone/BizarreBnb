@@ -14,9 +14,16 @@ const SplashPage = () => {
     return state.listing.images;
   });
 
+  console.log(listings);
+  console.log(images);
+
   useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getListings());
+  }, []);
 
   return (
     <main>
