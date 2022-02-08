@@ -16,7 +16,22 @@ router.get(
 );
 
 router.get(
-  "/:id",
+  "/my-listings/:id(\\d+)",
+  asyncHandler(async (req, res) => {
+    const userId = parseInt(req.params.id, 10);
+
+    const listing = await Listing.findByPk(id);
+    const listingImages = await Image.findAll({
+      where: {
+        listingId: id,
+      },
+    });
+
+    return res.json([listing, listingImages]);
+  })
+);
+router.get(
+  "/:id(\\d+)",
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10);
 

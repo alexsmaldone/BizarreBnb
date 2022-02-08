@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Route, useParams } from "react-router-dom";
+import { Link, Route, useParams } from "react-router-dom";
 import { getListings } from "../../store/listing";
 
 import "./HomePage.css";
@@ -42,15 +42,17 @@ const SplashPage = () => {
         <div className="listings-container">
           {listings.map((listing) => {
             return (
-              <div className="card-container" key={listing.id}>
-                <h4 className="listing-name">{listing.name}</h4>
-                <div className="listing-img-container">
-                  <img src={images[listing.id][0]} alt={listing.name} />
+              <Link key={listing.id} to={`listings/${listing.id}`}>
+                <div className="card-container">
+                  <h4 className="listing-name">{listing.name}</h4>
+                  <div className="listing-img-container">
+                    <img src={images[listing.id][0]} alt={listing.name} />
+                  </div>
+                  <h6 className="listing-location">
+                    {listing.city}, {listing.state}
+                  </h6>
                 </div>
-                <h6 className="listing-location">
-                  {listing.city}, {listing.state}
-                </h6>
-              </div>
+              </Link>
             );
           })}
         </div>

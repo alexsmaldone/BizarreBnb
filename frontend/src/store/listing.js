@@ -30,6 +30,16 @@ export const getOneListing = (id) => async (dispatch) => {
   }
 };
 
+export const getMyListings = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/listings/my-listings/${userId}`);
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(addOneListing(listing));
+    return listing;
+  }
+};
+
 const initialState = {
   list: [],
   images: [],
