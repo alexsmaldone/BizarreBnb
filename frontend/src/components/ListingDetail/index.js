@@ -15,30 +15,47 @@ const ListingDetail = () => {
 
   useEffect(() => {
     dispatch(getOneListing(Number(listingId)));
-  }, [dispatch]);
+  }, [dispatch, listingId]);
 
   if (!listing || !images) {
     return null;
   }
 
   return (
-    <main className="listing-detail">
-      <div>
+    <>
+      <main className="listing-detail">
         <h1>{listing?.name}</h1>
+        <h5>
+          {listing.city}, {listing.state}, {listing.zipcode}
+        </h5>
         <div className="review-container"></div>
         <div className="image-container">
           <div className="image-card">
-            <img src={images[0].url} />
+            <img className="listing-image" src={images[0].url} />
           </div>
           <div className="image-card">
-            <img src={images[1].url} />
+            <img className="listing-image" src={images[1].url} />
           </div>
           <div className="image-card">
-            <img src={images[2].url} />
+            <img className="listing-image" src={images[2].url} />
           </div>
         </div>
-      </div>
-    </main>
+        <div className="info-card">
+          <div className="listing-stats">
+            <div>$ {listing.price} / night</div>
+            <span>{listing.guests} guests</span>
+            <span>•</span>
+            <span>{listing.bedroom} bedroom</span>
+            <span>•</span>
+            <span>{listing.bath} bath</span>
+          </div>
+          <div className="border-top"> </div>
+          <div className="description-container">
+            <p className="description">{listing.description}</p>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 
