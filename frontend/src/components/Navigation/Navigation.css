@@ -1,4 +1,6 @@
 .nav-wrapper {
+  position: fixed;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,6 +12,7 @@
 .nav-logo-links {
   display: flex;
   align-items: center;
+  padding-left: 20px;
 }
 
 .fa-airbnb {
@@ -26,11 +29,13 @@
 ul.nav-dropdown {
   list-style: none;
   padding-inline-start: 0;
+  padding-right: 20px;
 }
 
 #profile-button {
   cursor: pointer;
   display: flex;
+  z-index: 3;
   align-items: center;
   background-color: #ffffff;
   border-radius: 21px !important;
@@ -50,6 +55,7 @@ ul.nav-dropdown {
 .profile-dropdown {
   padding-inline-start: 10px;
   position: absolute;
+  z-index: 2;
   list-style: none;
   margin-left: -100px;
   border-radius: 21px;
@@ -63,6 +69,7 @@ ul.nav-dropdown {
 .profile-dropdown li {
   font-size: 16px;
   margin-top: 5px;
+  z-index: 3;
 }
 .profile-dropdown li:hover {
   opacity: 60%;
