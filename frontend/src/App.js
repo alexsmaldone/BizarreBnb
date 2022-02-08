@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Homepage from "./components/HomePage";
 import ListingDetail from "./components/ListingDetail";
 import MyListings from "./components/MyListings";
+import NewListingForm from "./components/NewListingForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route path="/listings/my-listings">
             <MyListings />
+          </Route>
+          <Route path="/listings/new">
+            <NewListingForm />
           </Route>
           <Route path="/listings/:listingId">
             <ListingDetail />

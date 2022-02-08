@@ -39,4 +39,11 @@ router.get(
   })
 );
 
+router.get("/new");
+
+router.post(
+  "/",
+  asyncHandler(async (req, res) => {})
+);
+
 module.exports = router;

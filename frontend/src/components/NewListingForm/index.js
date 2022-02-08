@@ -58,6 +58,7 @@ function NewListingForm() {
 
   return (
     <main>
+      <h1>New Listing Form</h1>
       <section>
         <form onSubmit={handleSubmit}>
           <input
@@ -136,6 +137,7 @@ function NewListingForm() {
             value={bath}
             onChange={updateBath}
           />
+          <button type="submit">Create New Listing</button>
         </form>
       </section>
     </main>
