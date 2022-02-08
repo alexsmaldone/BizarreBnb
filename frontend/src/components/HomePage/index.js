@@ -8,14 +8,13 @@ import "./HomePage.css";
 const SplashPage = () => {
   const dispatch = useDispatch();
   const listings = useSelector((state) => {
-    return state.listing.list;
+    return state?.listing?.list;
   });
   const images = useSelector((state) => {
-    return state.listing.images;
+    return state?.listing?.images;
   });
 
-  console.log(listings);
-  console.log(images);
+  console.log("IMAGES=====", images);
 
   useEffect(() => {
     dispatch(getListings());
@@ -48,14 +47,14 @@ const SplashPage = () => {
         <div className="listings-container">
           {listings.map((listing) => {
             return (
-              <Link key={listing.id} to={`/listings/${listing.id}`}>
+              <Link key={listing.id} to={`/listings/${listing?.id}`}>
                 <div className="card-container">
-                  <h4 className="listing-name">{listing.name}</h4>
+                  <h4 className="listing-name">{listing?.name}</h4>
                   <div className="listing-img-container">
-                    <img src={images[listing.id][0]} alt={listing.name} />
+                    <img src={images?.[listing.id]?.[0]} alt={listing?.name} />
                   </div>
                   <h6 className="listing-location">
-                    {listing.city}, {listing.state}
+                    {listing?.city}, {listing?.state}
                   </h6>
                 </div>
               </Link>
