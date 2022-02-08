@@ -40,6 +40,18 @@ export const getMyListings = (userId) => async (dispatch) => {
   }
 };
 
+export const createListing = (payload) => async (dispatch) => {
+  const response = await fetch("/api/listings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const newListing = await response.json();
+    dispatch();
+  }
+};
+
 const initialState = {
   list: [],
   images: [],

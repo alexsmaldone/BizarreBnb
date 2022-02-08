@@ -50,6 +50,7 @@ function ProfileButton({ user }) {
           <li>
             <NavLink to="/listings/my-listings">My Listings</NavLink>
           </li>
+          <li>Create Listing</li>
           <li>
             <a
               href="https://github.com/alexsmaldone/BizarreBnb"
