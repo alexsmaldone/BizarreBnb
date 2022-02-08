@@ -60,10 +60,7 @@ function NewListingForm() {
       image3,
     };
 
-    const listing = await dispatch(createListing(payload));
-    if (listing) {
-      history.push(`listings/${listing.id}`);
-    }
+    dispatch(createListing(payload));
   };
 
   if (!sessionUser.id) {
@@ -173,7 +170,6 @@ function NewListingForm() {
             <textarea
               type="text"
               placeholder="Description of listing..."
-              required
               value={description}
               onChange={updateDescription}
             />

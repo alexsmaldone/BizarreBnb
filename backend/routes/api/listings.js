@@ -43,7 +43,69 @@ router.get("/new");
 
 router.post(
   "/",
-  asyncHandler(async (req, res) => {})
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+
+    const {
+      address,
+      city,
+      state,
+      zipcode,
+      country,
+      name,
+      description,
+      price,
+      guests,
+      bedroom,
+      bath,
+      image1,
+      image2,
+      image3,
+    } = req.body;
+
+    const newListing = await Listing.create({
+      address,
+      userId,
+      city,
+      state,
+      zipcode,
+      country,
+      name,
+      description,
+      price: Number(price),
+      guests: Number(guests),
+      bedroom: Number(bedroom),
+      bath: Number(bath),
+    });
+
+    const foundNewListing = await Listing.findOne({
+      where: {
+        userId,
+        address,
+      },
+    });
+
+    if (image1) {
+      const newImage1 = await Image.create({
+        listingId: foundNewListing.id,
+        url: image1,
+      });
+    }
+    if (image2) {
+      const newImage2 = await Image.create({
+        listingId: foundNewListing.id,
+        url: image2,
+      });
+    }
+    if (image3) {
+      const newImage3 = await Image.create({
+        listingId: foundNewListing.id,
+        url: image3,
+      });
+    }
+
+    return res.redirect(`/listings/${foundNewListing.id}`);
+  })
 );
 
 module.exports = router;

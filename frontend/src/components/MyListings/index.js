@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Route, useParams } from "react-router-dom";
+import { Link, Route, useParams, NavLink } from "react-router-dom";
 import { getMyListings } from "../../store/listing";
 
 import "./MyListings.css";
@@ -21,16 +21,21 @@ const MyListings = () => {
     dispatch(getMyListings(sessionUser.id));
   }, [dispatch]);
 
+  if (!sessionUser.id) return null;
+
   return (
     <div className="page-container">
       <div>
         <h1>My Listings</h1>
       </div>
+      <NavLink to="/listings/new">
+        <button className="new-listing-button">+ New Listing</button>
+      </NavLink>
       {userListings.length ? (
         <div className="listings-container">
           {userListings.map((listing) => {
             return (
-              <Link key={listing.id} to={`/listings/${listing.id}`}>
+              <NavLink key={listing.id} to={`/listings/${listing.id}`}>
                 <div className="card-container">
                   <h4 className="listing-name">{listing.name}</h4>
                   <div className="listing-img-container">
@@ -40,7 +45,7 @@ const MyListings = () => {
                     {listing.city}, {listing.state}
                   </h6>
                 </div>
-              </Link>
+              </NavLink>
             );
           })}
         </div>

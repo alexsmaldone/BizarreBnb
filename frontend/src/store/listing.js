@@ -1,5 +1,8 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD = "listings/LOAD";
 const LOAD_ONE = "listings/LOAD_ONE";
+const ADD_ONE = "listings/ADD_ONE";
 
 const load = (listings) => ({
   type: LOAD,
@@ -8,6 +11,11 @@ const load = (listings) => ({
 
 const loadOneListing = (listing) => ({
   type: LOAD_ONE,
+  listing,
+});
+
+const addOneListing = (listing) => ({
+  type: ADD_ONE,
   listing,
 });
 
@@ -41,14 +49,14 @@ export const getMyListings = (userId) => async (dispatch) => {
 };
 
 export const createListing = (payload) => async (dispatch) => {
-  const response = await fetch("/api/listings", {
+  const response = await csrfFetch("/api/listings", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
   if (response.ok) {
     const newListing = await response.json();
-    dispatch(loadOneListing(newListing));
+    dispatch(addOneListing(newListing));
     return newListing;
   }
 };
@@ -85,12 +93,17 @@ const listingsReducer = (state = initialState, action) => {
     }
 
     case LOAD_ONE: {
-      if (!state[action.listing]) {
-        return {
-          ...state,
-          list: action.listing,
-        };
-      }
+      return {
+        ...state,
+        list: action.listing,
+      };
+    }
+    case ADD_ONE: {
+      const newState = {
+        ...state,
+      };
+      newState.listing.list.push(action.listing);
+      return newState;
     }
 
     default:
