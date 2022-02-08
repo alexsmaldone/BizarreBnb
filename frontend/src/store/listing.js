@@ -1,13 +1,13 @@
 const LOAD = "listings/LOAD";
-const ADD_ONE = "listings/ADD_ONE";
+const LOAD_ONE = "listings/LOAD_ONE";
 
 const load = (listings) => ({
   type: LOAD,
   listings,
 });
 
-const addOneListing = (listing) => ({
-  type: ADD_ONE,
+const loadOneListing = (listing) => ({
+  type: LOAD_ONE,
   listing,
 });
 
@@ -25,7 +25,7 @@ export const getOneListing = (id) => async (dispatch) => {
 
   if (response.ok) {
     const listing = await response.json();
-    dispatch(addOneListing(listing));
+    dispatch(loadOneListing(listing));
     return listing;
   }
 };
@@ -48,7 +48,8 @@ export const createListing = (payload) => async (dispatch) => {
   });
   if (response.ok) {
     const newListing = await response.json();
-    dispatch();
+    dispatch(loadOneListing(newListing));
+    return newListing;
   }
 };
 
@@ -83,11 +84,13 @@ const listingsReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_ONE: {
-      return {
-        ...state,
-        list: action.listing,
-      };
+    case LOAD_ONE: {
+      if (!state[action.listing]) {
+        return {
+          ...state,
+          list: action.listing,
+        };
+      }
     }
 
     default:
