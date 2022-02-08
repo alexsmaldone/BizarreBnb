@@ -21,6 +21,9 @@ function NewListingForm() {
   const [guests, setGuests] = useState("");
   const [bedroom, setBedroom] = useState("");
   const [bath, setBath] = useState("");
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [image3, setImage3] = useState("");
 
   const updateAddress = (e) => setAddress(e.target.value);
   const updateCity = (e) => setCity(e.target.value);
@@ -33,6 +36,9 @@ function NewListingForm() {
   const updateGuests = (e) => setGuests(e.target.value);
   const updateBedroom = (e) => setBedroom(e.target.value);
   const updateBath = (e) => setBath(e.target.value);
+  const updateImage1 = (e) => setImage1(e.target.value);
+  const updateImage2 = (e) => setImage2(e.target.value);
+  const updateImage3 = (e) => setImage3(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,6 +55,9 @@ function NewListingForm() {
       guests,
       bedroom,
       bath,
+      image1,
+      image2,
+      image3,
     };
 
     const listing = await dispatch(createListing(payload));
@@ -139,6 +148,27 @@ function NewListingForm() {
               required
               value={bath}
               onChange={updateBath}
+            />
+            <input
+              type="text"
+              placeholder="Image 1 URL"
+              required
+              value={image1}
+              onChange={updateImage1}
+            />
+            <input
+              type="text"
+              placeholder="Image 2 URL"
+              required
+              value={image2}
+              onChange={updateImage2}
+            />
+            <input
+              type="text"
+              placeholder="Image 3 URL"
+              required
+              value={image3}
+              onChange={updateImage3}
             />
             <textarea
               type="text"
