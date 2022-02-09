@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const LOAD = "listings/LOAD";
 const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
+const UPDATE = "listings/UPDATE";
 
 const load = (listings) => ({
   type: LOAD,
@@ -16,6 +17,11 @@ const loadOneListing = (listing) => ({
 
 const addOneListing = (listing) => ({
   type: ADD_ONE,
+  listing,
+});
+
+const editListing = (listing) => ({
+  type: UPDATE,
   listing,
 });
 
@@ -58,6 +64,19 @@ export const createListing = (payload) => async (dispatch) => {
     const newListing = await response.json();
     dispatch(addOneListing(newListing));
     return newListing;
+  }
+};
+
+export const updateListing = (listing) => async (dispatch) => {
+  const response = await fetch(`/api/listings/${listing.id}`, {
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(listing),
+  });
+
+  if (response.ok) {
+    const editedListing = await response.json();
+    dispatch(editListing(editedListing));
   }
 };
 

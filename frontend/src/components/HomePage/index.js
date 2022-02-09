@@ -35,6 +35,7 @@ const SplashPage = () => {
         </div>
         <div className="background-image-container">
           <img
+            id="splash-page-img"
             src="https://a0.muscache.com/im/pictures/9b731de6-b8b6-4eae-aba2-631216bf1bfc.jpg?im_w=1200"
             alt="home in the shape of a boot"
           />
