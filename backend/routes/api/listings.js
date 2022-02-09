@@ -140,4 +140,15 @@ router.put(
   })
 );
 
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    const listing = await Listing.findByPk(id);
+
+    await listing.destroy();
+  })
+);
+
 module.exports = router;

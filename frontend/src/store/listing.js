@@ -34,6 +34,11 @@ const editListing = (listing) => ({
   listing,
 });
 
+const deleteOneListing = (listingId) => ({
+  type: DELETE,
+  listingId,
+});
+
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Thunks
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -91,6 +96,18 @@ export const updateListing = (listing) => async (dispatch) => {
     const updatedListing = await response.json();
     dispatch(editListing(updatedListing));
     return updatedListing;
+  }
+};
+
+export const deleteListing = (listingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/listings/${listingId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(deleteOneListing(listing.id));
   }
 };
 
