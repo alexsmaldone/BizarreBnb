@@ -9,7 +9,6 @@ function EditListingForm({ listing, closeModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const { listingId } = useParams();
 
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
@@ -45,8 +44,7 @@ function EditListingForm({ listing, closeModal }) {
     e.preventDefault();
 
     const payload = {
-      id: Number(listingId),
-      userId: sessionUser.id,
+      id: listing.id,
       address,
       city,
       state,
@@ -64,12 +62,9 @@ function EditListingForm({ listing, closeModal }) {
     };
 
     dispatch(updateListing(payload));
+    history.push(`/listings/${listing.id}`);
     closeModal();
   };
-
-  if (!sessionUser.id) {
-    return null;
-  }
 
   return (
     <main className="newlisting-container">
@@ -79,50 +74,50 @@ function EditListingForm({ listing, closeModal }) {
           <form className="listing-form" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Listing Title"
+              placeholder={"Name: " + listing.name}
               value={name}
               onChange={updateName}
             />
             <input
               type="text"
-              placeholder="Address - '1122 Boogie Woogie Ave'"
+              placeholder={"Address: " + listing.address}
               value={address}
               onChange={updateAddress}
             />
             <input
               type="text"
-              placeholder="City"
+              placeholder={"City: " + listing.city}
               value={city}
               onChange={updateCity}
             />
             <input
               type="text"
-              placeholder="State"
+              placeholder={"State: " + listing.state}
               value={state}
               onChange={updateState}
             />
             <input
               type="text"
-              placeholder="Zipcode"
+              placeholder={"Zipcode: " + listing.zipcode}
               value={zipcode}
               onChange={updateZipcode}
             />
             <input
               type="text"
-              placeholder="Country"
+              placeholder={"Country " + listing.country}
               value={country}
               onChange={updateCountry}
             />
             <input
               type="number"
               min="0"
-              placeholder="$ Price per night"
+              placeholder={"Price / Night: $" + listing.price}
               value={price}
               onChange={updatePrice}
             />
             <input
               type="number"
-              placeholder="Number of Guests"
+              placeholder={"Guests: " + listing.guests}
               min="1"
               value={guests}
               onChange={updateGuests}
@@ -130,20 +125,20 @@ function EditListingForm({ listing, closeModal }) {
             <input
               type="number"
               min="0"
-              placeholder="Number of Bedrooms"
+              placeholder={"Bedroom: " + listing.bedroom}
               value={bedroom}
               onChange={updateBedroom}
             />
             <input
               type="number"
               min="0"
-              placeholder="Number of bathrooms"
+              placeholder={"Bathroom: " + listing.bath}
               value={bath}
               onChange={updateBath}
             />
             <textarea
               type="text"
-              placeholder="Description of listing..."
+              placeholder={"Description: " + listing.description}
               value={description}
               onChange={updateDescription}
             />

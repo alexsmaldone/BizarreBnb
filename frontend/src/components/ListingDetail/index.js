@@ -53,7 +53,9 @@ const ListingDetail = () => {
             <span>{listing?.bedroom} bedroom</span>
             <span>•</span>
             <span>{listing?.bath} bath</span>
-            {listing.userId === sessionUser.id && <ListingEditModal />}
+            {listing.userId === sessionUser.id && (
+              <ListingEditModal listing={listing} />
+            )}
           </div>
           <div className="border-top"> </div>
           <div className="description-container">

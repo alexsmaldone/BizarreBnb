@@ -118,9 +118,6 @@ router.put(
       guests,
       bedroom,
       bath,
-      image1,
-      image2,
-      image3,
     } = req.body;
 
     const listing = await Listing.findByPk(id);
@@ -139,8 +136,6 @@ router.put(
     });
 
     await updatedListing.save();
-
-    console.log(req.body);
   })
 );
 
