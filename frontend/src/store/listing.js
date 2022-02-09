@@ -8,6 +8,7 @@ const LOAD = "listings/LOAD";
 const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
+const DELETE = "listings/DELETE";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -144,10 +145,13 @@ const listingsReducer = (state = initialState, action) => {
     }
 
     case UPDATE: {
-      return {
+      const newState = {
         ...state,
-        [action.listing.id]: action.listing,
+        list: [...state.list],
       };
+
+      newState.list[0] = action.listing;
+      return newState;
     }
 
     default:
