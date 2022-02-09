@@ -11,20 +11,20 @@ function EditListingForm() {
   const sessionUser = useSelector((state) => state.session.user);
   const { listingId } = useParams();
 
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [zipcode, setZipcode] = useState("");
-  const [country, setCountry] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [guests, setGuests] = useState("");
-  const [bedroom, setBedroom] = useState("");
-  const [bath, setBath] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
+  const [address, setAddress] = useState();
+  const [city, setCity] = useState();
+  const [state, setState] = useState();
+  const [zipcode, setZipcode] = useState();
+  const [country, setCountry] = useState();
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState();
+  const [guests, setGuests] = useState();
+  const [bedroom, setBedroom] = useState();
+  const [bath, setBath] = useState();
+  const [image1, setImage1] = useState();
+  const [image2, setImage2] = useState();
+  const [image3, setImage3] = useState();
 
   const updateAddress = (e) => setAddress(e.target.value);
   const updateCity = (e) => setCity(e.target.value);
@@ -45,6 +45,8 @@ function EditListingForm() {
     e.preventDefault();
 
     const payload = {
+      id: Number(listingId),
+      userId: sessionUser.id,
       address,
       city,
       state,
@@ -77,21 +79,18 @@ function EditListingForm() {
             <input
               type="text"
               placeholder="Listing Title"
-              required
               value={name}
               onChange={updateName}
             />
             <input
               type="text"
               placeholder="Address - '1122 Boogie Woogie Ave'"
-              required
               value={address}
               onChange={updateAddress}
             />
             <input
               type="text"
               placeholder="City"
-              required
               value={city}
               onChange={updateCity}
             />
@@ -104,14 +103,12 @@ function EditListingForm() {
             <input
               type="text"
               placeholder="Zipcode"
-              required
               value={zipcode}
               onChange={updateZipcode}
             />
             <input
               type="text"
               placeholder="Country"
-              required
               value={country}
               onChange={updateCountry}
             />
@@ -119,7 +116,6 @@ function EditListingForm() {
               type="number"
               min="0"
               placeholder="$ Price per night"
-              required
               value={price}
               onChange={updatePrice}
             />
@@ -127,7 +123,6 @@ function EditListingForm() {
               type="number"
               placeholder="Number of Guests"
               min="1"
-              required
               value={guests}
               onChange={updateGuests}
             />
@@ -135,7 +130,6 @@ function EditListingForm() {
               type="number"
               min="0"
               placeholder="Number of Bedrooms"
-              required
               value={bedroom}
               onChange={updateBedroom}
             />
@@ -143,28 +137,24 @@ function EditListingForm() {
               type="number"
               min="0"
               placeholder="Number of bathrooms"
-              required
               value={bath}
               onChange={updateBath}
             />
             <input
               type="text"
               placeholder="Image 1 URL"
-              required
               value={image1}
               onChange={updateImage1}
             />
             <input
               type="text"
               placeholder="Image 2 URL"
-              required
               value={image2}
               onChange={updateImage2}
             />
             <input
               type="text"
               placeholder="Image 3 URL"
-              required
               value={image3}
               onChange={updateImage3}
             />

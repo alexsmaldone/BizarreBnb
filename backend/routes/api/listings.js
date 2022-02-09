@@ -103,7 +103,44 @@ router.post(
 
 router.put(
   "/:id",
-  asyncHandler(async (req, res) => {})
+  asyncHandler(async (req, res) => {
+    const {
+      id,
+      address,
+      city,
+      state,
+      zipcode,
+      country,
+      name,
+      description,
+      price,
+      guests,
+      bedroom,
+      bath,
+      image1,
+      image2,
+      image3,
+    } = req.body;
+
+    const listing = await Listing.findByPk(id);
+    const updatedListing = await listing.update({
+      address,
+      city,
+      state,
+      zipcode,
+      country,
+      name,
+      description,
+      price,
+      guests,
+      bedroom,
+      bath,
+    });
+
+    await updatedListing.save();
+
+    console.log(req.body);
+  })
 );
 
 module.exports = router;

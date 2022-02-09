@@ -1,9 +1,17 @@
 import { csrfFetch } from "./csrf";
 
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Variables
+// todo ——————————————————————————————————————————————————————————————————————————————————
+
 const LOAD = "listings/LOAD";
 const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Action Creators
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 const load = (listings) => ({
   type: LOAD,
@@ -24,6 +32,10 @@ const editListing = (listing) => ({
   type: UPDATE,
   listing,
 });
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Thunks
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 export const getListings = () => async (dispatch) => {
   const response = await fetch("/api/listings");
@@ -68,15 +80,16 @@ export const createListing = (payload) => async (dispatch) => {
 };
 
 export const updateListing = (listing) => async (dispatch) => {
-  const response = await fetch(`/api/listings/${listing.id}`, {
+  const response = await csrfFetch(`/api/listings/${listing.id}`, {
     method: "PUT",
-    headers: { "Content-type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(listing),
   });
 
   if (response.ok) {
-    const editedListing = await response.json();
-    dispatch(editListing(editedListing));
+    const updatedListing = await response.json();
+    dispatch(editListing(updatedListing));
+    return updatedListing;
   }
 };
 
@@ -84,6 +97,10 @@ const initialState = {
   list: [],
   images: [],
 };
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Reducer
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -117,12 +134,20 @@ const listingsReducer = (state = initialState, action) => {
         list: action.listing,
       };
     }
+
     case ADD_ONE: {
       const newState = {
         ...state,
       };
       newState.listing.list.push(action.listing);
       return newState;
+    }
+
+    case UPDATE: {
+      return {
+        ...state,
+        [action.listing.id]: action.listing,
+      };
     }
 
     default:

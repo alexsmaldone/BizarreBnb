@@ -17,10 +17,10 @@ function NewListingForm() {
   const [country, setCountry] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [guests, setGuests] = useState("");
-  const [bedroom, setBedroom] = useState("");
-  const [bath, setBath] = useState("");
+  const [price, setPrice] = useState();
+  const [guests, setGuests] = useState();
+  const [bedroom, setBedroom] = useState();
+  const [bath, setBath] = useState();
   const [image1, setImage1] = useState("");
   const [image2, setImage2] = useState("");
   const [image3, setImage3] = useState("");
