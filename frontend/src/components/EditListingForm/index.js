@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateListing } from "../../store/listing";
 
 import "./EditListingForm.css";
 
-function EditListingForm({ listing }) {
+function EditListingForm() {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
+  const { listingId } = useParams();
 
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -44,7 +45,6 @@ function EditListingForm({ listing }) {
     e.preventDefault();
 
     const payload = {
-      ...listing,
       address,
       city,
       state,
@@ -71,7 +71,7 @@ function EditListingForm({ listing }) {
   return (
     <main className="newlisting-container">
       <div className="newlisting-subcontainer">
-        <h1>New Listing Form</h1>
+        <h1>Edit Your Listing</h1>
         <section>
           <form className="listing-form" onSubmit={handleSubmit}>
             <input

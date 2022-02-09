@@ -18,6 +18,10 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  });
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
@@ -32,7 +36,7 @@ function App() {
           <Route path="/listings/new">
             <NewListingForm />
           </Route>
-          <Route path="/listings/:listingId">
+          <Route exact path="/listings/:listingId">
             <ListingDetail />
           </Route>
           <Route path="/listings/:listingId/edit">
