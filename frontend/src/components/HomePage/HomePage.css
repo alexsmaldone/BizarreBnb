@@ -6,10 +6,18 @@
   text-align: center;
 }
 
+#splash-page-img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-radius: 20px;
+}
+
 h1.welcome {
   color: #ffffff;
   text-shadow: #222 1px 5px 10px;
-  animation: fadein 2s;
+  animation: fadein 4s;
   pointer-events: none;
 }
 
@@ -62,17 +70,6 @@ p.welcome {
   height: 30px;
   text-align: center;
   overflow-wrap: break-word;
-}
-
-#splash-page-img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-radius: 20px;
-}
-
-.listing-location {
 }
 
 .listing-img-container {

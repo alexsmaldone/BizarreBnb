@@ -78,34 +78,32 @@ router.post(
       bath: Number(bath),
     });
 
-    const foundNewListing = await Listing.findOne({
-      where: {
-        userId,
-        address,
-      },
-    });
-
     if (image1) {
       const newImage1 = await Image.create({
-        listingId: foundNewListing.id,
+        listingId: newListing.id,
         url: image1,
       });
     }
     if (image2) {
       const newImage2 = await Image.create({
-        listingId: foundNewListing.id,
+        listingId: newListing.id,
         url: image2,
       });
     }
     if (image3) {
       const newImage3 = await Image.create({
-        listingId: foundNewListing.id,
+        listingId: newListing.id,
         url: image3,
       });
     }
 
-    return res.redirect(`/listings/${foundNewListing.id}`);
+    return res.redirect(`/listings/${newListing.id}`);
   })
+);
+
+router.put(
+  "/:id",
+  asyncHandler(async (req, res) => {})
 );
 
 module.exports = router;

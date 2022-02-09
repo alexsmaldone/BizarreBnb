@@ -8,7 +8,7 @@ main.listing-detail {
 .image-container {
   display: flex;
   justify-content: space-around;
-  background-color: #ff5a5f;
+  background-color: #222222;
   border: 1px solid #dddddd !important;
   border-radius: 21px !important;
   padding: 10px 10px !important;
@@ -35,6 +35,9 @@ main.listing-detail {
 
 .listing-stats {
   margin-top: 10px;
+}
+.listing-stats div {
+  margin-bottom: 5px;
 }
 
 .listing-stats span {
