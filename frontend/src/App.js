@@ -39,9 +39,6 @@ function App() {
           <Route exact path="/listings/:listingId">
             <ListingDetail />
           </Route>
-          <Route path="/listings/:listingId/edit">
-            <EditListingForm />
-          </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>

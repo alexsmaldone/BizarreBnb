@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import EditListingForm from "./index";
 
-const PropertyFormModal = ({ listing }) => {
+const ListingEditModal = ({ listing }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -20,4 +20,4 @@ const PropertyFormModal = ({ listing }) => {
   );
 };
 
-export default PropertyFormModal;
+export default ListingEditModal;

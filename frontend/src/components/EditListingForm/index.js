@@ -5,7 +5,7 @@ import { updateListing } from "../../store/listing";
 
 import "./EditListingForm.css";
 
-function EditListingForm() {
+function EditListingForm({ listing, closeModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -64,6 +64,7 @@ function EditListingForm() {
     };
 
     dispatch(updateListing(payload));
+    closeModal();
   };
 
   if (!sessionUser.id) {
@@ -72,7 +73,7 @@ function EditListingForm() {
 
   return (
     <main className="newlisting-container">
-      <div className="newlisting-subcontainer">
+      <div className="editlisting-subcontainer">
         <h1>Edit Your Listing</h1>
         <section>
           <form className="listing-form" onSubmit={handleSubmit}>
@@ -139,24 +140,6 @@ function EditListingForm() {
               placeholder="Number of bathrooms"
               value={bath}
               onChange={updateBath}
-            />
-            <input
-              type="text"
-              placeholder="Image 1 URL"
-              value={image1}
-              onChange={updateImage1}
-            />
-            <input
-              type="text"
-              placeholder="Image 2 URL"
-              value={image2}
-              onChange={updateImage2}
-            />
-            <input
-              type="text"
-              placeholder="Image 3 URL"
-              value={image3}
-              onChange={updateImage3}
             />
             <textarea
               type="text"

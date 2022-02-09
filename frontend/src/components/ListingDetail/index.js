@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
 import { getOneListing } from "../../store/listing";
+import ListingEditModal from "../EditListingForm/ListingEditModal";
 
 import "./ListingDetail.css";
 
@@ -10,7 +11,7 @@ const ListingDetail = () => {
   const { listingId } = useParams();
 
   const listing = useSelector((state) => state?.listing?.list[0]);
-
+  const sessionUser = useSelector((state) => state.session.user);
   const images = useSelector((state) => state?.listing?.list[1]);
 
   useEffect(() => {
@@ -52,6 +53,7 @@ const ListingDetail = () => {
             <span>{listing?.bedroom} bedroom</span>
             <span>•</span>
             <span>{listing?.bath} bath</span>
+            {listing.userId === sessionUser.id && <ListingEditModal />}
           </div>
           <div className="border-top"> </div>
           <div className="description-container">
