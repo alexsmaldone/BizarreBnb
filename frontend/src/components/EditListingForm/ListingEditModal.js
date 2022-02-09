@@ -7,7 +7,9 @@ const ListingEditModal = ({ listing }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit Listing</button>
+      <button className="newlisting-button" onClick={() => setShowModal(true)}>
+        Edit Listing
+      </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditListingForm

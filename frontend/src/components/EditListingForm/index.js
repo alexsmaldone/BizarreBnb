@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateListing } from "../../store/listing";
 
@@ -61,8 +61,10 @@ function EditListingForm({ listing, closeModal }) {
       image3,
     };
 
-    dispatch(updateListing(payload));
-    history.push(`/listings/${listing.id}`);
+    const response = await dispatch(updateListing(payload));
+    if (response) {
+      history.push(`/listings/${listing.id}`);
+    }
     closeModal();
   };
 

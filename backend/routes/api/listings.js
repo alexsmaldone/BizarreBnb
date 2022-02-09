@@ -136,6 +136,7 @@ router.put(
     });
 
     await updatedListing.save();
+    return res.json(updatedListing);
   })
 );
 
