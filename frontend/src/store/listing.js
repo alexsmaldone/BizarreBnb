@@ -82,7 +82,7 @@ export const createListing = (payload) => async (dispatch) => {
 export const updateListing = (listing) => async (dispatch) => {
   const response = await csrfFetch(`/api/listings/${listing.id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-type": "application/json" },
     body: JSON.stringify(listing),
   });
 
