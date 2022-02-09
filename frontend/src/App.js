@@ -7,6 +7,9 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import Homepage from "./components/HomePage";
 import ListingDetail from "./components/ListingDetail";
+import MyListings from "./components/MyListings";
+import NewListingForm from "./components/NewListingForm";
+import EditListingForm from "./components/EditListingForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +17,10 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  });
 
   return (
     <>
@@ -23,11 +30,26 @@ function App() {
           <Route exact path="/">
             <Homepage />
           </Route>
-          <Route path="/listings/:listingId">
+          <Route path="/listings/my-listings">
+            <MyListings />
+          </Route>
+          <Route path="/listings/new">
+            <NewListingForm />
+          </Route>
+          <Route exact path="/listings/:listingId">
             <ListingDetail />
+          </Route>
+          <Route path="/listings/:listingId/edit">
+            <EditListingForm />
           </Route>
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+          <Route>
+            <h1>Page Not Found</h1>
+            <h1>Page Not Found</h1>
+            <h1>Page Not Found</h1>
+            <h1>Page Not Found</h1>
           </Route>
         </Switch>
       )}

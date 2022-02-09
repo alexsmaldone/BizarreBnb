@@ -17,6 +17,10 @@ const ListingDetail = () => {
     dispatch(getOneListing(Number(listingId)));
   }, [dispatch, listingId]);
 
+  useEffect(() => {
+    dispatch(getOneListing(Number(listingId)));
+  }, []);
+
   if (!listing || !images) {
     return null;
   }
@@ -31,27 +35,27 @@ const ListingDetail = () => {
         <div className="review-container"></div>
         <div className="image-container">
           <div className="image-card">
-            <img className="listing-image" src={images[0].url} />
+            <img className="listing-image" src={images[0]?.url} />
           </div>
           <div className="image-card">
-            <img className="listing-image" src={images[1].url} />
+            <img className="listing-image" src={images[1]?.url} />
           </div>
           <div className="image-card">
-            <img className="listing-image" src={images[2].url} />
+            <img className="listing-image" src={images[2]?.url} />
           </div>
         </div>
         <div className="info-card">
           <div className="listing-stats">
-            <div>$ {listing.price} / night</div>
-            <span>{listing.guests} guests</span>
+            <div>$ {listing?.price} / night</div>
+            <span>{listing?.guests} guests</span>
             <span>•</span>
-            <span>{listing.bedroom} bedroom</span>
+            <span>{listing?.bedroom} bedroom</span>
             <span>•</span>
-            <span>{listing.bath} bath</span>
+            <span>{listing?.bath} bath</span>
           </div>
           <div className="border-top"> </div>
           <div className="description-container">
-            <p className="description">{listing.description}</p>
+            <p className="description">{listing?.description}</p>
           </div>
         </div>
       </main>

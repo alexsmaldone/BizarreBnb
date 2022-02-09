@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Route, useParams } from "react-router-dom";
+import { Link, Route, useParams } from "react-router-dom";
 import { getListings } from "../../store/listing";
 
 import "./HomePage.css";
@@ -8,16 +8,21 @@ import "./HomePage.css";
 const SplashPage = () => {
   const dispatch = useDispatch();
   const listings = useSelector((state) => {
-    return state.listing.list;
+    return state?.listing?.list;
   });
   const images = useSelector((state) => {
-    return state.listing.images;
+    return state?.listing?.images;
   });
+
+  console.log("IMAGES=====", images);
 
   useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
-  console.log(images);
+
+  useEffect(() => {
+    dispatch(getListings());
+  }, []);
 
   return (
     <main>
@@ -30,6 +35,7 @@ const SplashPage = () => {
         </div>
         <div className="background-image-container">
           <img
+            id="splash-page-img"
             src="https://a0.muscache.com/im/pictures/9b731de6-b8b6-4eae-aba2-631216bf1bfc.jpg?im_w=1200"
             alt="home in the shape of a boot"
           />
@@ -42,15 +48,17 @@ const SplashPage = () => {
         <div className="listings-container">
           {listings.map((listing) => {
             return (
-              <div className="card-container" key={listing.id}>
-                <h4 className="listing-name">{listing.name}</h4>
-                <div className="listing-img-container">
-                  <img src={images[listing.id][0]} alt={listing.name} />
+              <Link key={listing.id} to={`/listings/${listing?.id}`}>
+                <div className="card-container">
+                  <h4 className="listing-name">{listing?.name}</h4>
+                  <div className="listing-img-container">
+                    <img src={images?.[listing.id]?.[0]} alt={listing?.name} />
+                  </div>
+                  <h6 className="listing-location">
+                    {listing?.city}, {listing?.state}
+                  </h6>
                 </div>
-                <h6 className="listing-location">
-                  {listing.city}, {listing.state}
-                </h6>
-              </div>
+              </Link>
             );
           })}
         </div>

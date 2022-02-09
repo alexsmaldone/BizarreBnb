@@ -1,15 +1,41 @@
+import { csrfFetch } from "./csrf";
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Variables
+// todo ——————————————————————————————————————————————————————————————————————————————————
+
 const LOAD = "listings/LOAD";
+const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
+const UPDATE = "listings/UPDATE";
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Action Creators
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 const load = (listings) => ({
   type: LOAD,
   listings,
 });
 
+const loadOneListing = (listing) => ({
+  type: LOAD_ONE,
+  listing,
+});
+
 const addOneListing = (listing) => ({
   type: ADD_ONE,
   listing,
 });
+
+const editListing = (listing) => ({
+  type: UPDATE,
+  listing,
+});
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Thunks
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 export const getListings = () => async (dispatch) => {
   const response = await fetch("/api/listings");
@@ -25,8 +51,45 @@ export const getOneListing = (id) => async (dispatch) => {
 
   if (response.ok) {
     const listing = await response.json();
-    dispatch(addOneListing(listing));
+    dispatch(loadOneListing(listing));
     return listing;
+  }
+};
+
+export const getMyListings = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/listings/my-listings`);
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(load(listing));
+    return listing;
+  }
+};
+
+export const createListing = (payload) => async (dispatch) => {
+  const response = await csrfFetch("/api/listings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (response.ok) {
+    const newListing = await response.json();
+    dispatch(addOneListing(newListing));
+    return newListing;
+  }
+};
+
+export const updateListing = (listing) => async (dispatch) => {
+  const response = await csrfFetch(`/api/listings/${listing.id}`, {
+    method: "PUT",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(listing),
+  });
+
+  if (response.ok) {
+    const updatedListing = await response.json();
+    dispatch(editListing(updatedListing));
+    return updatedListing;
   }
 };
 
@@ -34,6 +97,10 @@ const initialState = {
   list: [],
   images: [],
 };
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Reducer
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -61,10 +128,25 @@ const listingsReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_ONE: {
+    case LOAD_ONE: {
       return {
         ...state,
         list: action.listing,
+      };
+    }
+
+    case ADD_ONE: {
+      const newState = {
+        ...state,
+      };
+      newState.listing.list.push(action.listing);
+      return newState;
+    }
+
+    case UPDATE: {
+      return {
+        ...state,
+        [action.listing.id]: action.listing,
       };
     }
 
