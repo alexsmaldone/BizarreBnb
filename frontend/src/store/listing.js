@@ -158,8 +158,9 @@ const listingsReducer = (state = initialState, action) => {
     case ADD_ONE: {
       const newState = {
         ...state,
+        list: [...state.list],
       };
-      newState.listing.list.push(action.listing);
+      newState.list.push(action.listing);
       return newState;
     }
 

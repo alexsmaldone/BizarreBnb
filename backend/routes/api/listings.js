@@ -98,7 +98,7 @@ router.post(
       });
     }
 
-    return res.redirect(`/listings/${newListing.id}`);
+    return res.json("Success!");
   })
 );
 

@@ -46,7 +46,6 @@ const MyListings = () => {
                     {listing.city}, {listing.state}
                   </h6>
                 </div>
-                <ListingEditModal listing={listing} />
               </NavLink>
             );
           })}
