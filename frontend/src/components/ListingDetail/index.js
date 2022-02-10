@@ -34,7 +34,8 @@ const ListingDetail = () => {
       <main className="listing-detail">
         <h1>{listing?.name}</h1>
         <h5>
-          {listing?.city}, {listing?.state}, {listing?.zipcode}
+          ⭐5.0 <span> • </span> {listing?.city}, {listing?.state},{" "}
+          {listing?.zipcode}
         </h5>
         <div className="review-container"></div>
         <div className="image-container">
