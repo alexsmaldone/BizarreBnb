@@ -37,7 +37,6 @@ const ListingDetail = () => {
           ⭐5.0 <span> • </span> {listing?.city}, {listing?.state},{" "}
           {listing?.zipcode}
         </h5>
-        <div className="review-container"></div>
         <div className="image-container">
           <div className="image-card">
             <img className="listing-image" src={images[0]?.url} />
