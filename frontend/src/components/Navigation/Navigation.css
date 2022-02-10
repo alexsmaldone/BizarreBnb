@@ -95,3 +95,23 @@ ul.nav-dropdown {
   padding: inherit;
   cursor: pointer;
 }
+
+.demo-dropdown-holder {
+  width: 250px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.demo-button {
+  font-family: inherit;
+  display: block;
+  margin-right: 25px;
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.demo-button:hover {
+  box-shadow: 0 0 5px white;
+}

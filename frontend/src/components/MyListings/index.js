@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Route, useParams, NavLink } from "react-router-dom";
 import { getMyListings } from "../../store/listing";
+import ListingEditModal from "../EditListingForm/ListingEditModal";
 
 import "./MyListings.css";
 
@@ -33,13 +34,13 @@ const MyListings = () => {
       </NavLink>
       {userListings.length ? (
         <div className="listings-container">
-          {userListings.map((listing) => {
+          {userListings?.map((listing) => {
             return (
               <NavLink key={listing.id} to={`/listings/${listing.id}`}>
                 <div className="card-container">
                   <h4 className="listing-name">{listing.name}</h4>
                   <div className="listing-img-container">
-                    <img src={images[listing.id][0]} alt={listing.name} />
+                    <img src={images?.[listing.id]?.[0]} alt={listing.name} />
                   </div>
                   <h6 className="listing-location">
                     {listing.city}, {listing.state}

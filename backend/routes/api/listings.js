@@ -98,7 +98,7 @@ router.post(
       });
     }
 
-    return res.redirect(`/listings/${newListing.id}`);
+    return res.json("Success!");
   })
 );
 
@@ -118,9 +118,6 @@ router.put(
       guests,
       bedroom,
       bath,
-      image1,
-      image2,
-      image3,
     } = req.body;
 
     const listing = await Listing.findByPk(id);
@@ -139,8 +136,26 @@ router.put(
     });
 
     await updatedListing.save();
+    return res.json(updatedListing);
+  })
+);
 
-    console.log(req.body);
+router.delete(
+  "/:id",
+  asyncHandler(async (req, res) => {
+    const { listingId } = req.body;
+    let id = Number(listingId);
+
+    const listing = await Listing.findByPk(id);
+
+    await Image.destroy({
+      where: {
+        listingId: id,
+      },
+    });
+    await listing.destroy();
+
+    return res.json("Success!");
   })
 );
 

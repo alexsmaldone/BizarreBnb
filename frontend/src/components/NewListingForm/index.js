@@ -60,7 +60,10 @@ function NewListingForm() {
       image3,
     };
 
-    dispatch(createListing(payload));
+    let createdListing = await dispatch(createListing(payload));
+    if (createdListing) {
+      history.push("/listings/my-listings");
+    }
   };
 
   if (!sessionUser.id) {

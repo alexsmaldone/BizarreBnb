@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import { NavLink, Redirect, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateListing } from "../../store/listing";
 
 import "./EditListingForm.css";
 
-function EditListingForm() {
+function EditListingForm({ listing, closeModal }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
-  const { listingId } = useParams();
 
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
@@ -45,8 +44,7 @@ function EditListingForm() {
     e.preventDefault();
 
     const payload = {
-      id: Number(listingId),
-      userId: sessionUser.id,
+      id: listing.id,
       address,
       city,
       state,
@@ -63,65 +61,65 @@ function EditListingForm() {
       image3,
     };
 
-    dispatch(updateListing(payload));
+    const response = await dispatch(updateListing(payload));
+    if (response) {
+      history.push(`/listings/${listing.id}`);
+    }
+    closeModal();
   };
-
-  if (!sessionUser.id) {
-    return null;
-  }
 
   return (
     <main className="newlisting-container">
-      <div className="newlisting-subcontainer">
+      <div className="editlisting-subcontainer">
         <h1>Edit Your Listing</h1>
         <section>
           <form className="listing-form" onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="Listing Title"
+              placeholder={"Name: " + listing.name}
               value={name}
               onChange={updateName}
             />
             <input
               type="text"
-              placeholder="Address - '1122 Boogie Woogie Ave'"
+              placeholder={"Address: " + listing.address}
               value={address}
               onChange={updateAddress}
             />
             <input
               type="text"
-              placeholder="City"
+              placeholder={"City: " + listing.city}
               value={city}
               onChange={updateCity}
             />
             <input
               type="text"
-              placeholder="State"
+              placeholder={"State: " + listing.state}
               value={state}
               onChange={updateState}
             />
             <input
               type="text"
-              placeholder="Zipcode"
+              placeholder={"Zipcode: " + listing.zipcode}
               value={zipcode}
               onChange={updateZipcode}
             />
             <input
               type="text"
-              placeholder="Country"
+              placeholder={"Country " + listing.country}
               value={country}
               onChange={updateCountry}
             />
             <input
               type="number"
               min="0"
-              placeholder="$ Price per night"
+              placeholder={"Price / Night: $" + listing.price}
               value={price}
               onChange={updatePrice}
             />
             <input
               type="number"
-              placeholder="Number of Guests"
+              placeholder={"Guests: " + listing.guests}
               min="1"
               value={guests}
               onChange={updateGuests}
@@ -129,38 +127,20 @@ function EditListingForm() {
             <input
               type="number"
               min="0"
-              placeholder="Number of Bedrooms"
+              placeholder={"Bedroom: " + listing.bedroom}
               value={bedroom}
               onChange={updateBedroom}
             />
             <input
               type="number"
               min="0"
-              placeholder="Number of bathrooms"
+              placeholder={"Bathroom: " + listing.bath}
               value={bath}
               onChange={updateBath}
             />
-            <input
-              type="text"
-              placeholder="Image 1 URL"
-              value={image1}
-              onChange={updateImage1}
-            />
-            <input
-              type="text"
-              placeholder="Image 2 URL"
-              value={image2}
-              onChange={updateImage2}
-            />
-            <input
-              type="text"
-              placeholder="Image 3 URL"
-              value={image3}
-              onChange={updateImage3}
-            />
             <textarea
               type="text"
-              placeholder="Description of listing..."
+              placeholder={"Description: " + listing.description}
               value={description}
               onChange={updateDescription}
             />

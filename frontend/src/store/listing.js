@@ -8,6 +8,7 @@ const LOAD = "listings/LOAD";
 const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
+const DELETE = "listings/DELETE";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -31,6 +32,11 @@ const addOneListing = (listing) => ({
 const editListing = (listing) => ({
   type: UPDATE,
   listing,
+});
+
+const deleteOneListing = (listingId) => ({
+  type: DELETE,
+  listingId,
 });
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -82,7 +88,7 @@ export const createListing = (payload) => async (dispatch) => {
 export const updateListing = (listing) => async (dispatch) => {
   const response = await csrfFetch(`/api/listings/${listing.id}`, {
     method: "PUT",
-    headers: { "Content-type": "application/json" },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(listing),
   });
 
@@ -90,6 +96,20 @@ export const updateListing = (listing) => async (dispatch) => {
     const updatedListing = await response.json();
     dispatch(editListing(updatedListing));
     return updatedListing;
+  }
+};
+
+export const deleteListing = (listingId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/listings/${listingId}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(listingId),
+  });
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(deleteOneListing(listing));
+    return listing;
   }
 };
 
@@ -138,16 +158,29 @@ const listingsReducer = (state = initialState, action) => {
     case ADD_ONE: {
       const newState = {
         ...state,
+        list: [...state.list],
       };
-      newState.listing.list.push(action.listing);
+      newState.list.push(action.listing);
       return newState;
     }
 
     case UPDATE: {
-      return {
+      const newState = {
         ...state,
-        [action.listing.id]: action.listing,
+        list: [...state.list],
       };
+
+      newState.list[0] = action.listing;
+      return newState;
+    }
+
+    case DELETE: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+      newState.list[0] = action.listingId;
+      return newState;
     }
 
     default:

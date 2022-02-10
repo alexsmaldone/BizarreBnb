@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { getOneListing } from "../../store/listing";
+import listingsReducer, { getOneListing } from "../../store/listing";
+import ListingEditModal from "../EditListingForm/ListingEditModal";
+import ListingDeleteButton from "../ListingDelete";
 
 import "./ListingDetail.css";
 
@@ -10,7 +12,7 @@ const ListingDetail = () => {
   const { listingId } = useParams();
 
   const listing = useSelector((state) => state?.listing?.list[0]);
-
+  const sessionUser = useSelector((state) => state.session.user);
   const images = useSelector((state) => state?.listing?.list[1]);
 
   useEffect(() => {
@@ -25,12 +27,14 @@ const ListingDetail = () => {
     return null;
   }
 
+  let listingImages = [images[0]?.id, images[1]?.id, images[2]?.id];
+
   return (
     <>
       <main className="listing-detail">
         <h1>{listing?.name}</h1>
         <h5>
-          {listing.city}, {listing.state}, {listing.zipcode}
+          {listing?.city}, {listing?.state}, {listing?.zipcode}
         </h5>
         <div className="review-container"></div>
         <div className="image-container">
@@ -52,6 +56,12 @@ const ListingDetail = () => {
             <span>{listing?.bedroom} bedroom</span>
             <span>•</span>
             <span>{listing?.bath} bath</span>
+            {listing?.userId === sessionUser?.id && (
+              <>
+                <ListingEditModal listing={listing} />
+                <ListingDeleteButton listingId={listingId} />
+              </>
+            )}
           </div>
           <div className="border-top"> </div>
           <div className="description-container">
