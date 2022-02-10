@@ -34,9 +34,9 @@ const editListing = (listing) => ({
   listing,
 });
 
-const deleteOneListing = (listingId) => ({
+const deleteOneListing = (listingId, images) => ({
   type: DELETE,
-  listingId,
+  payload: [listingId, images],
 });
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -99,7 +99,7 @@ export const updateListing = (listing) => async (dispatch) => {
   }
 };
 
-export const deleteListing = (listingId) => async (dispatch) => {
+export const deleteListing = (listingId, images) => async (dispatch) => {
   const response = await csrfFetch(`/api/listings/${listingId}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
@@ -107,7 +107,7 @@ export const deleteListing = (listingId) => async (dispatch) => {
 
   if (response.ok) {
     const listing = await response.json();
-    dispatch(deleteOneListing(listing.id));
+    dispatch(deleteOneListing(listing.id, images));
   }
 };
 
@@ -169,6 +169,13 @@ const listingsReducer = (state = initialState, action) => {
 
       newState.list[0] = action.listing;
       return newState;
+    }
+
+    case DELETE: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
     }
 
     default:
