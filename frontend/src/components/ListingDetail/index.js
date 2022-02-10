@@ -34,7 +34,7 @@ const ListingDetail = () => {
       <main className="listing-detail">
         <h1>{listing?.name}</h1>
         <h5>
-          {listing.city}, {listing.state}, {listing.zipcode}
+          {listing?.city}, {listing?.state}, {listing?.zipcode}
         </h5>
         <div className="review-container"></div>
         <div className="image-container">
@@ -56,7 +56,7 @@ const ListingDetail = () => {
             <span>{listing?.bedroom} bedroom</span>
             <span>•</span>
             <span>{listing?.bath} bath</span>
-            {listing.userId === sessionUser.id && (
+            {listing?.userId === sessionUser?.id && (
               <>
                 <ListingEditModal listing={listing} />
                 <ListingDeleteButton listingId={listingId} />
