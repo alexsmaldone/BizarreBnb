@@ -143,11 +143,31 @@ router.put(
 router.delete(
   "/:id",
   asyncHandler(async (req, res) => {
-    const { id } = req.body;
+    const { listingId } = req.body;
+    let id = Number(listingId);
 
     const listing = await Listing.findByPk(id);
+    const images = await Image.findAll({
+      where: {
+        listingId: id,
+      },
+    });
 
+    let image1 = images[0];
+    let image2 = images[1];
+    let image3 = images[2];
+
+    await image1.destroy();
+    await image2.destroy();
+    await image3.destroy();
     await listing.destroy();
+
+    return res.json("Success!");
+
+    console.log("LISTING===", listing);
+    console.log("IMAGES===", images);
+
+    // await listing.destroy();
   })
 );
 

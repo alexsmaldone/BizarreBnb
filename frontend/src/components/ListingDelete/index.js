@@ -1,19 +1,30 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { deleteListing, deleteListing } from "../../store/listing";
+import { deleteListing } from "../../store/listing";
 
-const ListingDeleteButton = ({ listingId, images }) => {
+const ListingDeleteButton = (listingId) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const deleteListing = await dispatch(deleteListing(listingId, images));
-    alert("Deleted");
-    history.push("/listings/my-listings");
+    const deletedListing = await dispatch(deleteListing(listingId));
+
+    if (deletedListing) {
+      alert("Listing Deleted");
+      history.push("/listings/my-listings");
+    }
   };
 
-  return <button onClick={handleDelete}>Delete Listing</button>;
+  return (
+    <button
+      className="newlisting-button"
+      style={{ marginLeft: "5px" }}
+      onClick={handleDelete}
+    >
+      Delete Listing
+    </button>
+  );
 };
 
 export default ListingDeleteButton;

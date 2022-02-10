@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useParams } from "react-router-dom";
-import { getOneListing } from "../../store/listing";
+import listingsReducer, { getOneListing } from "../../store/listing";
 import ListingEditModal from "../EditListingForm/ListingEditModal";
+import ListingDeleteButton from "../ListingDelete";
 
 import "./ListingDetail.css";
 
@@ -25,6 +26,8 @@ const ListingDetail = () => {
   if (!listing || !images) {
     return null;
   }
+
+  let listingImages = [images[0]?.id, images[1]?.id, images[2]?.id];
 
   return (
     <>
@@ -56,7 +59,7 @@ const ListingDetail = () => {
             {listing.userId === sessionUser.id && (
               <>
                 <ListingEditModal listing={listing} />
-                <button>Test Delete</button>
+                <ListingDeleteButton listingId={listingId} />
               </>
             )}
           </div>
