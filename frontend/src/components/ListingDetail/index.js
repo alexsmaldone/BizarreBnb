@@ -4,6 +4,7 @@ import { NavLink, useParams } from "react-router-dom";
 import listingsReducer, { getOneListing } from "../../store/listing";
 import ListingEditModal from "../EditListingForm/ListingEditModal";
 import ListingDeleteButton from "../ListingDelete";
+import ReviewForm from "../Reviews/ReviewForm";
 
 import "./ListingDetail.css";
 
@@ -68,6 +69,7 @@ const ListingDetail = () => {
             <p className="description">{listing?.description}</p>
           </div>
         </div>
+        <ReviewForm listingId={listingId} />
       </main>
     </>
   );

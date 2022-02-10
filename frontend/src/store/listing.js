@@ -9,6 +9,7 @@ const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
 const DELETE = "listings/DELETE";
+const ADD_REVIEW = "listings/ADD_REVIEW";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -37,6 +38,11 @@ const editListing = (listing) => ({
 const deleteOneListing = (listingId) => ({
   type: DELETE,
   listingId,
+});
+
+const createOneReview = (review) => ({
+  type: ADD_REVIEW,
+  review,
 });
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -113,14 +119,31 @@ export const deleteListing = (listingId) => async (dispatch) => {
   }
 };
 
-const initialState = {
-  list: [],
-  images: [],
+export const createReview = (review) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/listings/:listingId/${review.listingId}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const review = await response.json();
+    dispatch(createOneReview(review));
+    return review;
+  }
 };
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reducer
 // todo ——————————————————————————————————————————————————————————————————————————————————
+
+const initialState = {
+  list: [],
+  images: [],
+};
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -180,6 +203,15 @@ const listingsReducer = (state = initialState, action) => {
         list: [...state.list],
       };
       newState.list[0] = action.listingId;
+      return newState;
+    }
+
+    case ADD_REVIEW: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+      newState.list.push(action.review);
       return newState;
     }
 
