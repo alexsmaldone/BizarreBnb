@@ -7,14 +7,17 @@ import ListingDeleteButton from "../ListingDelete";
 import ReviewForm from "../Reviews/ReviewForm";
 
 import "./ListingDetail.css";
+import "../Reviews/Reviews.css";
 
 const ListingDetail = () => {
   const dispatch = useDispatch();
   const { listingId } = useParams();
 
-  const listing = useSelector((state) => state?.listing?.list[0]);
   const sessionUser = useSelector((state) => state.session.user);
+  const listing = useSelector((state) => state?.listing?.list[0]);
   const images = useSelector((state) => state?.listing?.list[1]);
+  const reviews = useSelector((state) => state?.listing?.list[2]);
+  console.log(reviews);
 
   useEffect(() => {
     dispatch(getOneListing(Number(listingId)));
@@ -69,7 +72,25 @@ const ListingDetail = () => {
             <p className="description">{listing?.description}</p>
           </div>
         </div>
+        <div className="border-top"> </div>
+        <h2>Reviews</h2>
         <ReviewForm listingId={listingId} />
+        <div className="reviews-container">
+          {reviews?.length ? (
+            <>
+              {reviews.map((review) => {
+                return (
+                  <div key={review?.id} className="review-box">
+                    <div className="review-user">{review?.User?.firstName}</div>
+                    <div className="review-text">{review?.review}</div>
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <p>Be the first one to review!</p>
+          )}
+        </div>
       </main>
     </>
   );

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { createReview } from "../../store/listing";
 
 const ReviewForm = ({ listingId }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
   const [review, setReview] = useState("");
@@ -11,14 +14,19 @@ const ReviewForm = ({ listingId }) => {
   const updateReview = (e) => setReview(e.target.value);
   const updateRating = (e) => setRating(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(listingId, review, rating);
+
     const payload = {
       review,
       rating,
       listingId,
     };
+
+    const response = await dispatch(createReview(payload));
+    if (response) {
+      history.push(`/listings/${listingId}`);
+    }
   };
 
   return (

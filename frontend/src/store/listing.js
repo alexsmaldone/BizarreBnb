@@ -121,7 +121,7 @@ export const deleteListing = (listingId) => async (dispatch) => {
 
 export const createReview = (review) => async (dispatch) => {
   const response = await csrfFetch(
-    `/api/listings/:listingId/${review.listingId}`,
+    `/api/listings/${review.listingId}/reviews`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -130,9 +130,9 @@ export const createReview = (review) => async (dispatch) => {
   );
 
   if (response.ok) {
-    const review = await response.json();
-    dispatch(createOneReview(review));
-    return review;
+    const newReview = await response.json();
+    dispatch(createOneReview(newReview));
+    return newReview;
   }
 };
 
@@ -211,7 +211,7 @@ const listingsReducer = (state = initialState, action) => {
         ...state,
         list: [...state.list],
       };
-      newState.list.push(action.review);
+      newState.list[2].push(action.review);
       return newState;
     }
 
