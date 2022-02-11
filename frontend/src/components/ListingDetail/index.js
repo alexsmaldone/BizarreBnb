@@ -83,14 +83,18 @@ const ListingDetail = () => {
                   <div key={review?.id} className="review-box">
                     <div className="review-box-top">
                       <i className="fas fa-user-circle review" />
-                      <div className="review-user">
-                        {review?.User?.firstName}
+                      <div className="review-time-name">
+                        <div className="review-user">
+                          {review?.User?.firstName}
+                        </div>
+                        <div className="review-time">
+                          {review?.createdAt.slice(0, 7)}
+                        </div>
                       </div>
                     </div>
-                    <div className="review-time">
-                      {review?.createdAt.slice(0, 7)}
+                    <div className="review-text-box">
+                      <span className="review-text">{review?.review}</span>
                     </div>
-                    <div className="review-text">{review?.review}</div>
                   </div>
                 );
               })}

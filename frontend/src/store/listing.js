@@ -10,6 +10,7 @@ const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
 const DELETE = "listings/DELETE";
 const ADD_REVIEW = "listings/ADD_REVIEW";
+const DELETE_REVIEW = "listings/DELETE_REVIEW";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
