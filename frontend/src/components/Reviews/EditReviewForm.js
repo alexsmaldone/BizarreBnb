@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createReview } from "../../store/listing";
+import { editReview } from "../../store/listing";
 
-const EditReviewForm = ({ review }) => {
+const EditReviewForm = ({ review, closeModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
@@ -18,14 +18,15 @@ const EditReviewForm = ({ review }) => {
     e.preventDefault();
 
     const payload = {
+      listingId: review.listingId,
+      id: review.id,
       updatedReview,
       rating,
     };
 
-    const response = await dispatch(createReview(payload));
-    if (response) {
-      history.push(`/listings/${review.listingId}`);
-    }
+    dispatch(editReview(payload));
+
+    closeModal();
   };
 
   return (

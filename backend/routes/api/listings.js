@@ -6,7 +6,7 @@ const { Listing } = require("../../db/models");
 const { Image } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { User } = require("../../db/models");
-const { db } = require("../../db/models");
+const { sequelize } = require("sequelize");
 
 const router = express.Router();
 
@@ -207,6 +207,21 @@ router.delete(
     await review.destroy();
 
     return res.json("sucess!");
+  })
+);
+
+router.put(
+  "/:id/reviews/:id",
+  asyncHandler(async (req, res) => {
+    const { id, updatedReview, rating } = req.body;
+
+    const review = await Review.findByPk(id);
+    const newReview = await review.update({
+      rating,
+      review: updatedReview,
+    });
+
+    return res.json(newReview);
   })
 );
 

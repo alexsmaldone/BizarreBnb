@@ -18,7 +18,7 @@ const ReviewDeleteButton = ({ review, listingId }) => {
 
   return (
     <button
-      style={{ marginTop: "5px", marginBottom: "5px" }}
+      style={{ marginTop: "5px", marginBottom: "5px", marginLeft: "5px" }}
       className="newlisting-button"
       onClick={handleDelete}
     >

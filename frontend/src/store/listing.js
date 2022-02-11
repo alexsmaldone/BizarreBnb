@@ -11,6 +11,7 @@ const UPDATE = "listings/UPDATE";
 const DELETE = "listings/DELETE";
 const ADD_REVIEW = "listings/ADD_REVIEW";
 const DELETE_REVIEW = "listings/DELETE_REVIEW";
+const EDIT_REVIEW = "listings/EDIT_REVIEW";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -48,6 +49,11 @@ const createOneReview = (review) => ({
 
 const deleteOneReview = (review) => ({
   type: DELETE_REVIEW,
+  review,
+});
+
+const editOneReview = (review) => ({
+  type: EDIT_REVIEW,
   review,
 });
 
@@ -159,6 +165,23 @@ export const deleteReview = (review) => async (dispatch) => {
   }
 };
 
+export const editReview = (review) => async (dispatch) => {
+  const response = csrfFetch(
+    `/api/listings/${review.listingId}/reviews/${review.id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const editedReview = await response.json();
+    dispatch(editOneReview(editedReview));
+    return editedReview;
+  }
+};
+
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reducer
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -239,6 +262,16 @@ const listingsReducer = (state = initialState, action) => {
     }
 
     case DELETE_REVIEW: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+
+      newState.list[0] = action.review;
+      return newState;
+    }
+
+    case EDIT_REVIEW: {
       const newState = {
         ...state,
         list: [...state.list],

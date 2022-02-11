@@ -99,11 +99,11 @@ const ListingDetail = () => {
                     </div>
                     {sessionUser?.id === review?.userId && (
                       <>
+                        <EditReviewModal review={review} />
                         <ReviewDeleteButton
                           review={review}
                           listingId={listingId}
                         />
-                        <EditReviewModal review={review} />
                       </>
                     )}
                   </div>
