@@ -75,7 +75,7 @@ const ListingDetail = () => {
         </div>
         <div className="border-top"> </div>
         <h2>Reviews</h2>
-        <ReviewForm listingId={listingId} />
+        {sessionUser?.id && <ReviewForm listingId={listingId} />}
         <div className="reviews-container">
           {reviews?.length ? (
             <>
@@ -96,7 +96,12 @@ const ListingDetail = () => {
                     <div className="review-text-box">
                       <span className="review-text">{review?.review}</span>
                     </div>
-                    <ReviewDeleteButton review={review} listingId={listingId} />
+                    {sessionUser?.id === review?.userId && (
+                      <ReviewDeleteButton
+                        review={review}
+                        listingId={listingId}
+                      />
+                    )}
                   </div>
                 );
               })}

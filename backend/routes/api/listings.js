@@ -6,6 +6,7 @@ const { Listing } = require("../../db/models");
 const { Image } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { User } = require("../../db/models");
+const { db } = require("../../db/models");
 
 const router = express.Router();
 

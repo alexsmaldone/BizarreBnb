@@ -17,7 +17,11 @@ const ReviewDeleteButton = ({ review, listingId }) => {
   };
 
   return (
-    <button className="newlisting-button" onClick={handleDelete}>
+    <button
+      style={{ marginTop: "5px", marginBottom: "5px" }}
+      className="newlisting-button"
+      onClick={handleDelete}
+    >
       Delete Review
     </button>
   );
