@@ -22,7 +22,7 @@ const ReviewDeleteButton = ({ review, listingId }) => {
       className="newlisting-button"
       onClick={handleDelete}
     >
-      Delete Review
+      Delete
     </button>
   );
 };

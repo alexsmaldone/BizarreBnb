@@ -9,6 +9,7 @@ import ReviewForm from "../Reviews/ReviewForm";
 import "./ListingDetail.css";
 import "../Reviews/Reviews.css";
 import ReviewDeleteButton from "../Reviews/DeleteReview";
+import EditReviewModal from "../Reviews/EditReviewModal";
 
 const ListingDetail = () => {
   const dispatch = useDispatch();
@@ -97,10 +98,13 @@ const ListingDetail = () => {
                       <span className="review-text">{review?.review}</span>
                     </div>
                     {sessionUser?.id === review?.userId && (
-                      <ReviewDeleteButton
-                        review={review}
-                        listingId={listingId}
-                      />
+                      <>
+                        <ReviewDeleteButton
+                          review={review}
+                          listingId={listingId}
+                        />
+                        <EditReviewModal review={review} />
+                      </>
                     )}
                   </div>
                 );
