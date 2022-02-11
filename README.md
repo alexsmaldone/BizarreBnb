@@ -1,8 +1,6 @@
 # BizarreBnb
 
-![Screen Shot 2022-02-04 at 3 26 01 PM](https://user-images.githubusercontent.com/87352324/152616362-84fca2e4-e7c9-458a-a668-27fbb7caebf4.png)
-
-**BnB SF** is a web application for booking and hosting spots in San Francisco. It was inspired by AirBnb and built using React, Redux, Express with PostgreSQL database.
+**BizarreBnB** is a web application for browsing and booking the quirkiest collection of BnBs on the internet. It was inspired by AirBnb and built using React, Redux, Express with PostgreSQL database.
 
 Browse live link to **BizarreBnB** [here](https://bizarrebnb.herokuapp.com/).
 
