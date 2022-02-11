@@ -45,7 +45,9 @@ const ReviewForm = ({ listingId }) => {
           <option>4</option>
           <option>5</option>
         </select>
-        <button onClick={handleSubmit}>Submit Review</button>
+        <button className="newlisting-button" onClick={handleSubmit}>
+          + Create Review
+        </button>
       </form>
     </>
   );
