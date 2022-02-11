@@ -34,6 +34,7 @@ const ReviewForm = ({ listingId }) => {
       <div className="review-form-container">
         <form className="review-form">
           <textarea
+            required
             type="text"
             placeholder="Start writing your review here..."
             value={review}

@@ -31,24 +31,28 @@ const EditReviewForm = ({ review, closeModal }) => {
 
   return (
     <>
-      <form>
-        <textarea
-          type="text"
-          placeholder="Start writing your review here..."
-          value={updatedReview}
-          onChange={updateReview}
-        />
-        <select onChange={updateRating} value={rating}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
-        <button className="newlisting-button" onClick={handleSubmit}>
-          Submit Edit
-        </button>
-      </form>
+      <div className="review-modal-form-container">
+        <form className="review-form">
+          <textarea
+            type="text"
+            placeholder="Start writing your review here..."
+            value={updatedReview}
+            onChange={updateReview}
+          />
+          <label for="rating">Rating (1 - 5) </label>
+
+          <select onChange={updateRating} value={rating}>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+          <button className="newlisting-button" onClick={handleSubmit}>
+            Submit Edit
+          </button>
+        </form>
+      </div>
     </>
   );
 };

@@ -106,7 +106,9 @@ function SignupFormPage() {
               />
             </label>
             <div className="button-container">
-              <button type="submit">Sign Up</button>
+              <button className="newlisting-button" type="submit">
+                Sign Up
+              </button>
             </div>
           </form>
         </div>

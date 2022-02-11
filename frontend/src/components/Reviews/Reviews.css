@@ -65,8 +65,14 @@
   font-family: inherit;
   height: 50px;
   margin-bottom: 5px;
+  resize: none;
 }
 .review-form select {
   font-family: inherit;
   width: 50%;
+}
+
+.review-modal-form-container {
+  width: 500px;
+  border-radius: 12px;
 }
