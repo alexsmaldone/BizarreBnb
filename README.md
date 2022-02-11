@@ -15,7 +15,7 @@ Browse live link to **BizarreBnB** [here](https://bizarrebnb.herokuapp.com/).
 * Git
 * Heroku
 
-## Instalation on your local machine
+## Installation on your local machine
 1. To be able to install BizarreBnB on your local machine, please clone this project repository. 
 ```
 git clone git@github.com:alexsmaldone/BizarreBnb.git
