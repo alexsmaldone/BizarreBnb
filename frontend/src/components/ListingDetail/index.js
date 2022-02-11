@@ -81,7 +81,15 @@ const ListingDetail = () => {
               {reviews.map((review) => {
                 return (
                   <div key={review?.id} className="review-box">
-                    <div className="review-user">{review?.User?.firstName}</div>
+                    <div className="review-box-top">
+                      <i className="fas fa-user-circle review" />
+                      <div className="review-user">
+                        {review?.User?.firstName}
+                      </div>
+                    </div>
+                    <div className="review-time">
+                      {review?.createdAt.slice(0, 7)}
+                    </div>
                     <div className="review-text">{review?.review}</div>
                   </div>
                 );

@@ -1,7 +1,33 @@
-.review-container {
+.reviews-container {
   margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .review-box {
   border: 1px solid red;
+  width: 400px;
+  height: 100px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-box-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.review-user {
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.fas.fa-user-circle.review {
+  font-size: 30px;
+  margin-left: 0;
 }
