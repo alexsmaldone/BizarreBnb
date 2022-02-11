@@ -9,6 +9,8 @@ const LOAD_ONE = "listings/LOAD_ONE";
 const ADD_ONE = "listings/ADD_ONE";
 const UPDATE = "listings/UPDATE";
 const DELETE = "listings/DELETE";
+const ADD_REVIEW = "listings/ADD_REVIEW";
+const DELETE_REVIEW = "listings/DELETE_REVIEW";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -37,6 +39,16 @@ const editListing = (listing) => ({
 const deleteOneListing = (listingId) => ({
   type: DELETE,
   listingId,
+});
+
+const createOneReview = (review) => ({
+  type: ADD_REVIEW,
+  review,
+});
+
+const deleteOneReview = (review) => ({
+  type: DELETE_REVIEW,
+  review,
 });
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -113,14 +125,48 @@ export const deleteListing = (listingId) => async (dispatch) => {
   }
 };
 
-const initialState = {
-  list: [],
-  images: [],
+export const createReview = (review) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/listings/${review.listingId}/reviews`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const newReview = await response.json();
+    dispatch(createOneReview(newReview));
+    return newReview;
+  }
+};
+
+export const deleteReview = (review) => async (dispatch) => {
+  const response = csrfFetch(
+    `/api/listings/${review.listingId}/reviews/${review.id}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const deletedReview = await response.json();
+    dispatch(deleteOneReview(deletedReview));
+    return deletedReview;
+  }
 };
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reducer
 // todo ——————————————————————————————————————————————————————————————————————————————————
+
+const initialState = {
+  list: [],
+  images: [],
+};
 
 const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -180,6 +226,25 @@ const listingsReducer = (state = initialState, action) => {
         list: [...state.list],
       };
       newState.list[0] = action.listingId;
+      return newState;
+    }
+
+    case ADD_REVIEW: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+      newState.list[2].push(action.review);
+      return newState;
+    }
+
+    case DELETE_REVIEW: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+
+      newState.list[0] = action.review;
       return newState;
     }
 

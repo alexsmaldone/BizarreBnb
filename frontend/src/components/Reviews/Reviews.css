@@ -1,0 +1,48 @@
+.reviews-container {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.review-box {
+  /* border: 1px solid red; */
+  width: 400px;
+  height: 150px;
+  margin-bottom: 20px;
+}
+
+.review-box-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.review-time-name {
+  margin-left: 10px;
+}
+
+.review-time {
+  font-size: smaller;
+}
+
+.review-user {
+  font-weight: bold;
+}
+
+.fas.fa-user-circle.review {
+  font-size: 50px;
+  margin-left: 0;
+}
+
+.review-text-box {
+  width: 100%;
+  line-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  box-sizing: border-box;
+}

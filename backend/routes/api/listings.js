@@ -4,8 +4,15 @@ const { requireAuth } = require("../../utils/auth");
 
 const { Listing } = require("../../db/models");
 const { Image } = require("../../db/models");
+const { Review } = require("../../db/models");
+const { User } = require("../../db/models");
+const { db } = require("../../db/models");
 
 const router = express.Router();
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Listings
+// todo ——————————————————————————————————————————————————————————————————————————————————
 
 router.get(
   "/",
@@ -36,7 +43,17 @@ router.get(
       },
     });
 
-    return res.json([listing, listingImages]);
+    const reviews = await Review.findAll({
+      where: {
+        listingId: id,
+      },
+      include: {
+        model: User,
+        attributes: ["firstName"],
+      },
+    });
+
+    return res.json([listing, listingImages, reviews]);
   })
 );
 
@@ -156,6 +173,40 @@ router.delete(
     await listing.destroy();
 
     return res.json("Success!");
+  })
+);
+
+// todo ——————————————————————————————————————————————————————————————————————————————————
+// todo                                 Reviews
+// todo ——————————————————————————————————————————————————————————————————————————————————
+
+router.post(
+  "/:id/reviews",
+  asyncHandler(async (req, res) => {
+    const userId = req.user.id;
+    const firstName = req.user.firstName;
+    const { review, rating, listingId } = req.body;
+
+    const newReview = await Review.create({
+      userId,
+      listingId,
+      review,
+      rating,
+    });
+
+    return res.json(newReview);
+  })
+);
+
+router.delete(
+  "/:id/reviews/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    const review = await Review.findByPk(id);
+    await review.destroy();
+
+    return res.json("sucess!");
   })
 );
 
