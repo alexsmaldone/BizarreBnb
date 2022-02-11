@@ -8,6 +8,7 @@ import ReviewForm from "../Reviews/ReviewForm";
 
 import "./ListingDetail.css";
 import "../Reviews/Reviews.css";
+import ReviewDeleteButton from "../Reviews/DeleteReview";
 
 const ListingDetail = () => {
   const dispatch = useDispatch();
@@ -95,6 +96,7 @@ const ListingDetail = () => {
                     <div className="review-text-box">
                       <span className="review-text">{review?.review}</span>
                     </div>
+                    <ReviewDeleteButton review={review} listingId={listingId} />
                   </div>
                 );
               })}

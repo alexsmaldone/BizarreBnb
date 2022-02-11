@@ -1,17 +1,18 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { deleteReview } from "../../store/listing";
 
-const ReviewDeleteButton = ({ review, listing }) => {
+const ReviewDeleteButton = ({ review, listingId }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    const deletedReview = await dispatch(deleteReview);
+    const deletedReview = await dispatch(deleteReview(review));
 
     if (deletedReview) {
       alert("Review Deleted");
-      history.push(`/listings/${listing.id}`);
+      history.push(`/listings/${listingId}`);
     }
   };
 

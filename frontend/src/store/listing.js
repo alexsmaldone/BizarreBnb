@@ -46,6 +46,11 @@ const createOneReview = (review) => ({
   review,
 });
 
+const deleteOneReview = (review) => ({
+  type: DELETE_REVIEW,
+  review,
+});
+
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Thunks
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -137,6 +142,23 @@ export const createReview = (review) => async (dispatch) => {
   }
 };
 
+export const deleteReview = (review) => async (dispatch) => {
+  const response = csrfFetch(
+    `/api/listings/${review.listingId}/reviews/${review.id}`,
+    {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const deletedReview = await response.json();
+    dispatch(deleteOneReview(deletedReview));
+    return deletedReview;
+  }
+};
+
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reducer
 // todo ——————————————————————————————————————————————————————————————————————————————————
@@ -213,6 +235,16 @@ const listingsReducer = (state = initialState, action) => {
         list: [...state.list],
       };
       newState.list[2].push(action.review);
+      return newState;
+    }
+
+    case DELETE_REVIEW: {
+      const newState = {
+        ...state,
+        list: [...state.list],
+      };
+
+      newState.list[0] = action.review;
       return newState;
     }
 

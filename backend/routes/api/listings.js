@@ -197,4 +197,16 @@ router.post(
   })
 );
 
+router.delete(
+  "/:id/reviews/:id",
+  asyncHandler(async (req, res) => {
+    const { id } = req.body;
+
+    const review = await Review.findByPk(id);
+    await review.destroy();
+
+    return res.json("sucess!");
+  })
+);
+
 module.exports = router;
