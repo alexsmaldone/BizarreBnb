@@ -272,13 +272,7 @@ const listingsReducer = (state = initialState, action) => {
     }
 
     case EDIT_REVIEW: {
-      const newState = {
-        ...state,
-        list: [...state.list],
-      };
-
-      newState.list[0] = action.review;
-      return newState;
+      return { ...state };
     }
 
     default:

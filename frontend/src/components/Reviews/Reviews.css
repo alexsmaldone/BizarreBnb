@@ -46,3 +46,27 @@
   -webkit-box-orient: vertical;
   box-sizing: border-box;
 }
+
+.review-form-container {
+  width: 50%;
+  margin-bottom: 30px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-form textarea {
+  font-family: inherit;
+  height: 50px;
+  margin-bottom: 5px;
+}
+.review-form select {
+  font-family: inherit;
+  width: 50%;
+}
