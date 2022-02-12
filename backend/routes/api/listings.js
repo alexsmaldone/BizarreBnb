@@ -170,6 +170,13 @@ router.delete(
         listingId: id,
       },
     });
+
+    await Review.destroy({
+      where: {
+        listingId: id,
+      },
+    });
+
     await listing.destroy();
 
     return res.json("Success!");

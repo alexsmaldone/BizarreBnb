@@ -274,10 +274,11 @@ const listingsReducer = (state = initialState, action) => {
     case EDIT_REVIEW: {
       const newState = { ...state };
 
-      const reviewIndex = newState.list[2].findIndex(
-        (review) => review.id === action.review.id
+      const updatedReviews = newState.list[2].map((review) =>
+        review.id === action.review.id ? (review = action.review) : review
       );
-      newState.list[2].push(action.review);
+
+      newState.list[2] = updatedReviews;
       return newState;
     }
 
