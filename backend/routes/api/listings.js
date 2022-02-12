@@ -204,9 +204,10 @@ router.delete(
     const { id } = req.body;
 
     const review = await Review.findByPk(id);
+    const tempReview = review;
     await review.destroy();
 
-    return res.json("sucess!");
+    return res.json(tempReview);
   })
 );
 

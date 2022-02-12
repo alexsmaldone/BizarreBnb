@@ -12,7 +12,6 @@ const ReviewDeleteButton = ({ review, listingId }) => {
 
     if (deletedReview) {
       alert("Review Deleted");
-      history.push(`/listings/${listingId}`);
     }
   };
 
