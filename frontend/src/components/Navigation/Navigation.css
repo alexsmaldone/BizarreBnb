@@ -10,6 +10,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
+:any-link {
+  color: inherit;
+}
+
 .nav-logo-links {
   display: flex;
   align-items: center;

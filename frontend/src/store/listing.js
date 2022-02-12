@@ -256,7 +256,7 @@ const listingsReducer = (state = initialState, action) => {
         ...state,
         list: [...state.list],
       };
-      newState.list[2].push(action.review);
+      newState.list[2].unshift(action.review);
       return newState;
     }
 
