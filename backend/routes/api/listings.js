@@ -194,7 +194,17 @@ router.post(
       rating,
     });
 
-    return res.json(newReview);
+    const newReviewWithName = await Review.findOne({
+      where: {
+        id: newReview.id,
+      },
+      include: {
+        model: User,
+        attributes: ["firstName"],
+      },
+    });
+
+    return res.json(newReviewWithName);
   })
 );
 
@@ -222,7 +232,17 @@ router.put(
       review: updatedReview,
     });
 
-    return res.json(newReview);
+    const editedReview = await Review.findOne({
+      where: {
+        id: newReview.id,
+      },
+      include: {
+        model: User,
+        attributes: ["firstName"],
+      },
+    });
+    console.log("======= NEW REVIEW", editedReview);
+    return res.json(editedReview);
   })
 );
 

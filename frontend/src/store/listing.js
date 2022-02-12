@@ -165,7 +165,7 @@ export const deleteReview = (review) => async (dispatch) => {
 };
 
 export const editReview = (review) => async (dispatch) => {
-  const response = csrfFetch(
+  const response = await csrfFetch(
     `/api/listings/${review.listingId}/reviews/${review.id}`,
     {
       method: "PUT",
@@ -272,7 +272,13 @@ const listingsReducer = (state = initialState, action) => {
     }
 
     case EDIT_REVIEW: {
-      return { ...state };
+      const newState = { ...state };
+
+      const reviewIndex = newState.list[2].findIndex(
+        (review) => review.id === action.review.id
+      );
+      newState.list[2].push(action.review);
+      return newState;
     }
 
     default:

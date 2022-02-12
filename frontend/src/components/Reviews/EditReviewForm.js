@@ -14,7 +14,7 @@ const EditReviewForm = ({ review, closeModal }) => {
   const updateReview = (e) => setUpdatedReview(e.target.value);
   const updateRating = (e) => setRating(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
