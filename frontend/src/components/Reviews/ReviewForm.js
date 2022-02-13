@@ -14,6 +14,8 @@ const ReviewForm = ({ listingId }) => {
   const updateReview = (e) => setReview(e.target.value);
   const updateRating = (e) => setRating(e.target.value);
 
+  const reviewContainer = document.querySelector(".reviews-container");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -23,12 +25,11 @@ const ReviewForm = ({ listingId }) => {
       listingId,
     };
 
-    const response = await dispatch(createReview(payload));
-    if (response) {
+    const createdReview = await dispatch(createReview(payload));
+    if (createdReview) {
+      setReview("");
       history.push(`/listings/${listingId}`);
     }
-
-    setReview("");
   };
 
   return (
@@ -37,7 +38,7 @@ const ReviewForm = ({ listingId }) => {
         <form className="review-form">
           <textarea
             required
-            minlength="5"
+            minLength="5"
             placeholder="Start writing your review here..."
             value={review}
             onChange={updateReview}

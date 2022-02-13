@@ -251,7 +251,6 @@ router.put(
         attributes: ["firstName"],
       },
     });
-    console.log("======= NEW REVIEW", editedReview);
     return res.json(editedReview);
   })
 );
