@@ -10,15 +10,22 @@ const ReviewForm = ({ listingId }) => {
 
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(5);
+  const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    const errors = [];
+
+    if (review.length < 5) {
+      errors.push("Review must be at least 5 characters");
+    }
+    setErrors(errors);
+  }, [review]);
 
   const updateReview = (e) => setReview(e.target.value);
   const updateRating = (e) => setRating(e.target.value);
 
-  const reviewContainer = document.querySelector(".reviews-container");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = {
       review,
       rating,
@@ -35,9 +42,13 @@ const ReviewForm = ({ listingId }) => {
   return (
     <>
       <div className="review-form-container">
+        <ul className="errors">
+          {errors.length > 0 &&
+            errors.map((error) => <li key={error}>{error}</li>)}
+        </ul>
         <form className="review-form">
           <textarea
-            required
+            required="required"
             minLength="5"
             placeholder="Start writing your review here..."
             value={review}

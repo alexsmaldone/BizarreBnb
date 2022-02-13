@@ -11,6 +11,7 @@ import MyListings from "./components/MyListings";
 import NewListingForm from "./components/NewListingForm";
 import EditListingForm from "./components/EditListingForm";
 import ScrollToTop from "./components/ScrollToTop";
+import PageNotFound from "./components/404Page/404Page";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,10 +44,7 @@ function App() {
               <SignupFormPage />
             </Route>
             <Route>
-              <h1>Page Not Found</h1>
-              <h1>Page Not Found</h1>
-              <h1>Page Not Found</h1>
-              <h1>Page Not Found</h1>
+              <PageNotFound />
             </Route>
           </Switch>
         </ScrollToTop>

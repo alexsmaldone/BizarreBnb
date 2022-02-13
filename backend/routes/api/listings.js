@@ -1,6 +1,8 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { requireAuth } = require("../../utils/auth");
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
 
 const { Listing } = require("../../db/models");
 const { Image } = require("../../db/models");
@@ -189,6 +191,20 @@ router.delete(
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reviews
 // todo ——————————————————————————————————————————————————————————————————————————————————
+
+// const validateCreateReview = [
+//   check("review")
+//     .exists({ checkFalsy: true })
+//     .withMessage("Please submit a review.")
+//     .isLength({ max: 255 })
+//     .withMessage("Reviews must be no longer than 255 characters."),
+//   check("rating")
+//     .exists({ checkFalsy: true })
+//     .withMessage("Please rate your stay.")
+//     .isNumeric()
+//     .withMessage("Ratings must be 1-5."),
+//   handleValidationErrors,
+// ];
 
 router.post(
   "/:id/reviews",

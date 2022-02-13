@@ -80,6 +80,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Name: " + listing.name}
               value={name}
               onChange={updateName}
+              required
             />
             <label>Address</label>
             <input
@@ -87,6 +88,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Address: " + listing.address}
               value={address}
               onChange={updateAddress}
+              required
             />
             <label>City</label>
             <input
@@ -94,6 +96,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"City: " + listing.city}
               value={city}
               onChange={updateCity}
+              required
             />
             <label>State</label>
             <input
@@ -108,6 +111,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Zipcode: " + listing.zipcode}
               value={zipcode}
               onChange={updateZipcode}
+              required
             />
             <label>Country</label>
             <input
@@ -115,6 +119,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Country " + listing.country}
               value={country}
               onChange={updateCountry}
+              required
             />
             <label>$ Price / Night</label>
             <input
@@ -123,6 +128,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Price / Night: $" + listing.price}
               value={price}
               onChange={updatePrice}
+              required
             />
             <label>Guests</label>
             <input
@@ -131,6 +137,7 @@ function EditListingForm({ listing, closeModal }) {
               min="1"
               value={guests}
               onChange={updateGuests}
+              required
             />
             <label>Bedrooms</label>
             <input
@@ -139,6 +146,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Bedroom: " + listing.bedroom}
               value={bedroom}
               onChange={updateBedroom}
+              required
             />
             <label>Bathrooms</label>
             <input
@@ -147,6 +155,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Bathroom: " + listing.bath}
               value={bath}
               onChange={updateBath}
+              required
             />
             <label>Description</label>
             <textarea
@@ -154,6 +163,7 @@ function EditListingForm({ listing, closeModal }) {
               placeholder={"Description: " + listing.description}
               value={description}
               onChange={updateDescription}
+              required
             />
             <button className="newlisting-button" type="submit">
               Update Listing

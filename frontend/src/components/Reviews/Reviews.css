@@ -5,6 +5,19 @@
   flex-wrap: wrap;
 }
 
+.review-form-container ul {
+  list-style: none;
+  font-size: small;
+  color: red;
+  padding-inline-start: 0;
+}
+.review-form ul {
+  list-style: none;
+  font-size: small;
+  color: red;
+  padding-inline-start: 0;
+}
+
 .review-box {
   /* border: 1px solid red; */
   width: 400px;
