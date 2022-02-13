@@ -12,6 +12,7 @@ function LoginForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    e.stopPropagation();
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password })).catch(
       async (res) => {
