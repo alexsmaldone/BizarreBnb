@@ -27,6 +27,8 @@ const ReviewForm = ({ listingId }) => {
     if (response) {
       history.push(`/listings/${listingId}`);
     }
+
+    setReview("");
   };
 
   return (
@@ -35,7 +37,7 @@ const ReviewForm = ({ listingId }) => {
         <form className="review-form">
           <textarea
             required
-            type="text"
+            minlength="5"
             placeholder="Start writing your review here..."
             value={review}
             onChange={updateReview}

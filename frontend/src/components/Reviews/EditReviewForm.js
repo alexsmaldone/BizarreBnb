@@ -34,10 +34,11 @@ const EditReviewForm = ({ review, closeModal }) => {
       <div className="review-modal-form-container">
         <form className="review-form">
           <textarea
-            type="text"
             placeholder="Start writing your review here..."
             value={updatedReview}
             onChange={updateReview}
+            required
+            minlength="5"
           />
           <label for="rating">Rating (1 - 5) </label>
 
