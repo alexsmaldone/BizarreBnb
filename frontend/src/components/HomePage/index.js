@@ -17,6 +17,20 @@ const SplashPage = () => {
   console.log("IMAGES=====", images);
 
   useEffect(() => {
+    let listingsView = document.querySelector(".listings-container");
+
+    const scrollListings = () => {
+      return listingsView.scrollIntoView({
+        behavior: "smooth",
+        block: "end",
+        inline: "nearest",
+      });
+    };
+
+    setTimeout(() => scrollListings(), 4000);
+  });
+
+  useEffect(() => {
     dispatch(getListings());
   }, [dispatch]);
 
