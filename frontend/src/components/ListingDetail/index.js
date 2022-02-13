@@ -68,6 +68,7 @@ const ListingDetail = () => {
         </div>
         <div className="info-card">
           <div className="listing-stats">
+            <div>Hosted by {listing?.User?.firstName}</div>
             <div>$ {listing?.price} / night</div>
             <span>{listing?.guests} guests</span>
             <span>•</span>

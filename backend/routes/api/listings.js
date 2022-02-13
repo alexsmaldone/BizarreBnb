@@ -36,7 +36,10 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10);
 
-    const listing = await Listing.findByPk(id);
+    const listing = await Listing.findOne({
+      where: { id },
+      include: { model: User, attributes: ["firstName"] },
+    });
     const listingImages = await Image.findAll({
       where: {
         listingId: id,
