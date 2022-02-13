@@ -10,17 +10,17 @@ function EditListingForm({ listing, closeModal }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
-  const [zipcode, setZipcode] = useState();
-  const [country, setCountry] = useState();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState();
-  const [guests, setGuests] = useState();
-  const [bedroom, setBedroom] = useState();
-  const [bath, setBath] = useState();
+  const [address, setAddress] = useState(listing?.address);
+  const [city, setCity] = useState(listing?.city);
+  const [state, setState] = useState(listing?.state);
+  const [zipcode, setZipcode] = useState(listing?.zipcode);
+  const [country, setCountry] = useState(listing?.country);
+  const [name, setName] = useState(listing?.name);
+  const [description, setDescription] = useState(listing?.description);
+  const [price, setPrice] = useState(listing?.price);
+  const [guests, setGuests] = useState(listing?.guests);
+  const [bedroom, setBedroom] = useState(listing?.bedroom);
+  const [bath, setBath] = useState(listing?.bath);
   const [image1, setImage1] = useState();
   const [image2, setImage2] = useState();
   const [image3, setImage3] = useState();
@@ -74,42 +74,49 @@ function EditListingForm({ listing, closeModal }) {
         <h1>Edit Your Listing</h1>
         <section>
           <form className="listing-form" onSubmit={handleSubmit}>
+            <label>Name</label>
             <input
               type="text"
               placeholder={"Name: " + listing.name}
               value={name}
               onChange={updateName}
             />
+            <label>Address</label>
             <input
               type="text"
               placeholder={"Address: " + listing.address}
               value={address}
               onChange={updateAddress}
             />
+            <label>City</label>
             <input
               type="text"
               placeholder={"City: " + listing.city}
               value={city}
               onChange={updateCity}
             />
+            <label>State</label>
             <input
               type="text"
               placeholder={"State: " + listing.state}
               value={state}
               onChange={updateState}
             />
+            <label>Zipcode</label>
             <input
               type="text"
               placeholder={"Zipcode: " + listing.zipcode}
               value={zipcode}
               onChange={updateZipcode}
             />
+            <label>Country</label>
             <input
               type="text"
               placeholder={"Country " + listing.country}
               value={country}
               onChange={updateCountry}
             />
+            <label>$ Price / Night</label>
             <input
               type="number"
               min="0"
@@ -117,6 +124,7 @@ function EditListingForm({ listing, closeModal }) {
               value={price}
               onChange={updatePrice}
             />
+            <label>Guests</label>
             <input
               type="number"
               placeholder={"Guests: " + listing.guests}
@@ -124,6 +132,7 @@ function EditListingForm({ listing, closeModal }) {
               value={guests}
               onChange={updateGuests}
             />
+            <label>Bedrooms</label>
             <input
               type="number"
               min="0"
@@ -131,6 +140,7 @@ function EditListingForm({ listing, closeModal }) {
               value={bedroom}
               onChange={updateBedroom}
             />
+            <label>Bathrooms</label>
             <input
               type="number"
               min="0"
@@ -138,6 +148,7 @@ function EditListingForm({ listing, closeModal }) {
               value={bath}
               onChange={updateBath}
             />
+            <label>Description</label>
             <textarea
               type="text"
               placeholder={"Description: " + listing.description}

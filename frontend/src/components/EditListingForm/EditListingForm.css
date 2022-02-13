@@ -6,3 +6,7 @@
 .editlisting-subcontainer h1 {
   text-align: center;
 }
+
+.listing-form label {
+  font-weight: bold;
+}
