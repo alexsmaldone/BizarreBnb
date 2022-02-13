@@ -42,7 +42,9 @@ function Navigation({ isLoaded }) {
               <LoginFormModal />
             </div>
           )}
-
+          {sessionUser && (
+            <div className="user-greeting">Hi, {sessionUser?.firstName}</div>
+          )}
           <ul className="nav-dropdown">
             <li>{isLoaded && sessionLinks}</li>
           </ul>

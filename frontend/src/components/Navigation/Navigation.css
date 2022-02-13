@@ -126,6 +126,11 @@ ul.nav-dropdown {
   font-size: 16px;
 }
 
+.user-greeting {
+  align-self: center;
+  margin-right: 25px;
+}
+
 .demo-button:hover {
   box-shadow: 0 0 5px white;
 }
