@@ -9,10 +9,6 @@ const ReviewDeleteButton = ({ review, listingId }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     const deletedReview = await dispatch(deleteReview(review));
-
-    if (deletedReview) {
-      alert("Review Deleted");
-    }
   };
 
   return (
