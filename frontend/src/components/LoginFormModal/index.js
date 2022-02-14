@@ -14,6 +14,7 @@ function LoginFormModal() {
           setShowModal(true);
         }}
         type="button"
+        className="demo-button"
       >
         Log In
       </button>

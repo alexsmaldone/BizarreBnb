@@ -9,6 +9,7 @@ import ReviewForm from "../Reviews/ReviewForm";
 import "./ListingDetail.css";
 import "../Reviews/Reviews.css";
 import ReviewDeleteButton from "../Reviews/DeleteReview";
+import EditReviewModal from "../Reviews/EditReviewModal";
 
 const ListingDetail = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,18 @@ const ListingDetail = () => {
   const listing = useSelector((state) => state?.listing?.list[0]);
   const images = useSelector((state) => state?.listing?.list[1]);
   const reviews = useSelector((state) => state?.listing?.list[2]);
-  console.log(reviews);
+
+  let ratings;
+  let ratingSum;
+  let ratingAvg;
+  let roundedRating;
+
+  if (reviews?.length) {
+    ratings = reviews?.map((review) => review?.rating);
+    ratingSum = ratings.reduce((prev, curr) => prev + curr, 0);
+    ratingAvg = ratingSum / ratings.length;
+    roundedRating = ratingAvg.toFixed(2);
+  }
 
   useEffect(() => {
     dispatch(getOneListing(Number(listingId)));
@@ -39,8 +51,9 @@ const ListingDetail = () => {
       <main className="listing-detail">
         <h1>{listing?.name}</h1>
         <h5>
-          ⭐5.0 <span> • </span> {listing?.city}, {listing?.state},{" "}
-          {listing?.zipcode}
+          <i className="review-star fas fa-star" />{" "}
+          {isNaN(roundedRating) ? "Not yet rated" : roundedRating}{" "}
+          <span> • </span> {listing?.city}, {listing?.state}, {listing?.zipcode}
         </h5>
         <div className="image-container">
           <div className="image-card">
@@ -55,6 +68,7 @@ const ListingDetail = () => {
         </div>
         <div className="info-card">
           <div className="listing-stats">
+            <div>Hosted by {listing?.User?.firstName}</div>
             <div>$ {listing?.price} / night</div>
             <span>{listing?.guests} guests</span>
             <span>•</span>
@@ -75,7 +89,9 @@ const ListingDetail = () => {
         </div>
         <div className="border-top"> </div>
         <h2>Reviews</h2>
-        {sessionUser?.id && <ReviewForm listingId={listingId} />}
+        {sessionUser?.id && sessionUser?.id !== listing?.userId && (
+          <ReviewForm listingId={listingId} />
+        )}
         <div className="reviews-container">
           {reviews?.length ? (
             <>
@@ -97,10 +113,13 @@ const ListingDetail = () => {
                       <span className="review-text">{review?.review}</span>
                     </div>
                     {sessionUser?.id === review?.userId && (
-                      <ReviewDeleteButton
-                        review={review}
-                        listingId={listingId}
-                      />
+                      <>
+                        <EditReviewModal review={review} />
+                        <ReviewDeleteButton
+                          review={review}
+                          listingId={listingId}
+                        />
+                      </>
                     )}
                   </div>
                 );

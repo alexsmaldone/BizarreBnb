@@ -1,12 +1,14 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { requireAuth } = require("../../utils/auth");
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
 
 const { Listing } = require("../../db/models");
 const { Image } = require("../../db/models");
 const { Review } = require("../../db/models");
 const { User } = require("../../db/models");
-const { db } = require("../../db/models");
+const { sequelize } = require("sequelize");
 
 const router = express.Router();
 
@@ -36,7 +38,10 @@ router.get(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id, 10);
 
-    const listing = await Listing.findByPk(id);
+    const listing = await Listing.findOne({
+      where: { id },
+      include: { model: User, attributes: ["firstName"] },
+    });
     const listingImages = await Image.findAll({
       where: {
         listingId: id,
@@ -170,6 +175,13 @@ router.delete(
         listingId: id,
       },
     });
+
+    await Review.destroy({
+      where: {
+        listingId: id,
+      },
+    });
+
     await listing.destroy();
 
     return res.json("Success!");
@@ -179,6 +191,20 @@ router.delete(
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Reviews
 // todo ——————————————————————————————————————————————————————————————————————————————————
+
+// const validateCreateReview = [
+//   check("review")
+//     .exists({ checkFalsy: true })
+//     .withMessage("Please submit a review.")
+//     .isLength({ max: 255 })
+//     .withMessage("Reviews must be no longer than 255 characters."),
+//   check("rating")
+//     .exists({ checkFalsy: true })
+//     .withMessage("Please rate your stay.")
+//     .isNumeric()
+//     .withMessage("Ratings must be 1-5."),
+//   handleValidationErrors,
+// ];
 
 router.post(
   "/:id/reviews",
@@ -194,7 +220,17 @@ router.post(
       rating,
     });
 
-    return res.json(newReview);
+    const newReviewWithName = await Review.findOne({
+      where: {
+        id: newReview.id,
+      },
+      include: {
+        model: User,
+        attributes: ["firstName"],
+      },
+    });
+
+    return res.json(newReviewWithName);
   })
 );
 
@@ -204,9 +240,34 @@ router.delete(
     const { id } = req.body;
 
     const review = await Review.findByPk(id);
+    const tempReview = review;
     await review.destroy();
 
-    return res.json("sucess!");
+    return res.json(tempReview);
+  })
+);
+
+router.put(
+  "/:id/reviews/:id",
+  asyncHandler(async (req, res) => {
+    const { id, updatedReview, rating } = req.body;
+
+    const review = await Review.findByPk(id);
+    const newReview = await review.update({
+      rating,
+      review: updatedReview,
+    });
+
+    const editedReview = await Review.findOne({
+      where: {
+        id: newReview.id,
+      },
+      include: {
+        model: User,
+        attributes: ["firstName"],
+      },
+    });
+    return res.json(editedReview);
   })
 );
 

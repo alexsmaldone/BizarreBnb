@@ -10,17 +10,17 @@ function EditListingForm({ listing, closeModal }) {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
 
-  const [address, setAddress] = useState();
-  const [city, setCity] = useState();
-  const [state, setState] = useState();
-  const [zipcode, setZipcode] = useState();
-  const [country, setCountry] = useState();
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState();
-  const [guests, setGuests] = useState();
-  const [bedroom, setBedroom] = useState();
-  const [bath, setBath] = useState();
+  const [address, setAddress] = useState(listing?.address);
+  const [city, setCity] = useState(listing?.city);
+  const [state, setState] = useState(listing?.state);
+  const [zipcode, setZipcode] = useState(listing?.zipcode);
+  const [country, setCountry] = useState(listing?.country);
+  const [name, setName] = useState(listing?.name);
+  const [description, setDescription] = useState(listing?.description);
+  const [price, setPrice] = useState(listing?.price);
+  const [guests, setGuests] = useState(listing?.guests);
+  const [bedroom, setBedroom] = useState(listing?.bedroom);
+  const [bath, setBath] = useState(listing?.bath);
   const [image1, setImage1] = useState();
   const [image2, setImage2] = useState();
   const [image3, setImage3] = useState();
@@ -74,75 +74,96 @@ function EditListingForm({ listing, closeModal }) {
         <h1>Edit Your Listing</h1>
         <section>
           <form className="listing-form" onSubmit={handleSubmit}>
+            <label>Name</label>
             <input
               type="text"
               placeholder={"Name: " + listing.name}
               value={name}
               onChange={updateName}
+              required
             />
+            <label>Address</label>
             <input
               type="text"
               placeholder={"Address: " + listing.address}
               value={address}
               onChange={updateAddress}
+              required
             />
+            <label>City</label>
             <input
               type="text"
               placeholder={"City: " + listing.city}
               value={city}
               onChange={updateCity}
+              required
             />
+            <label>State</label>
             <input
               type="text"
               placeholder={"State: " + listing.state}
               value={state}
               onChange={updateState}
             />
+            <label>Zipcode</label>
             <input
               type="text"
               placeholder={"Zipcode: " + listing.zipcode}
               value={zipcode}
               onChange={updateZipcode}
+              required
             />
+            <label>Country</label>
             <input
               type="text"
               placeholder={"Country " + listing.country}
               value={country}
               onChange={updateCountry}
+              required
             />
+            <label>$ Price / Night</label>
             <input
               type="number"
               min="0"
               placeholder={"Price / Night: $" + listing.price}
               value={price}
               onChange={updatePrice}
+              required
             />
+            <label>Guests</label>
             <input
               type="number"
               placeholder={"Guests: " + listing.guests}
               min="1"
               value={guests}
               onChange={updateGuests}
+              required
             />
+            <label>Bedrooms</label>
             <input
               type="number"
               min="0"
               placeholder={"Bedroom: " + listing.bedroom}
               value={bedroom}
               onChange={updateBedroom}
+              required
             />
+            <label>Bathrooms</label>
             <input
               type="number"
               min="0"
               placeholder={"Bathroom: " + listing.bath}
               value={bath}
               onChange={updateBath}
+              required
             />
+            <label>Description</label>
             <textarea
               type="text"
               placeholder={"Description: " + listing.description}
               value={description}
               onChange={updateDescription}
+              required
             />
             <button className="newlisting-button" type="submit">
               Update Listing

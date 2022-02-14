@@ -9,20 +9,15 @@ const ReviewDeleteButton = ({ review, listingId }) => {
   const handleDelete = async (e) => {
     e.preventDefault();
     const deletedReview = await dispatch(deleteReview(review));
-
-    if (deletedReview) {
-      alert("Review Deleted");
-      history.push(`/listings/${listingId}`);
-    }
   };
 
   return (
     <button
-      style={{ marginTop: "5px", marginBottom: "5px" }}
+      style={{ marginTop: "5px", marginBottom: "5px", marginLeft: "5px" }}
       className="newlisting-button"
       onClick={handleDelete}
     >
-      Delete Review
+      Delete
     </button>
   );
 };

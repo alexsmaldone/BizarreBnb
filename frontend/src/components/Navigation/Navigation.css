@@ -10,6 +10,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
+:any-link {
+  color: inherit;
+}
+
 .nav-logo-links {
   display: flex;
   align-items: center;
@@ -102,14 +106,29 @@ ul.nav-dropdown {
   justify-content: flex-end;
 }
 
+.noauth-user-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
 .demo-button {
   font-family: inherit;
   display: block;
-  margin-right: 25px;
+  margin-right: 10px;
   border: none;
   background-color: transparent;
   color: #ffffff;
   cursor: pointer;
+  width: 150px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.user-greeting {
+  align-self: center;
+  margin-right: 25px;
 }
 
 .demo-button:hover {

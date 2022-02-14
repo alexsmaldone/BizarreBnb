@@ -20,17 +20,17 @@ function ProfileButton({ user }) {
     setShowMenu(false);
   }, []);
 
-  // useEffect(() => {
-  //   if (!showMenu) return;
+  useEffect(() => {
+    if (!showMenu) return;
 
-  //   const closeMenu = (e) => {
-  //     setShowMenu(false);
-  //   };
+    const closeMenu = () => {
+      setShowMenu(false);
+    };
 
-  //   profileButton.addEventListener("click", closeMenu);
+    document.addEventListener("click", closeMenu);
 
-  //   return () => profileButton.removeEventListener("click", closeMenu);
-  // }, [showMenu]);
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
 
   const logout = (e) => {
     e.preventDefault();
@@ -69,12 +69,6 @@ function ProfileButton({ user }) {
       )}
       {showMenu && !sessionUser && (
         <ul className="profile-dropdown">
-          <li>
-            <LoginFormModal />
-          </li>
-          <li>
-            <NavLink to="/signup">Sign Up</NavLink>
-          </li>
           <li>
             <a
               href="https://github.com/alexsmaldone/BizarreBnb"

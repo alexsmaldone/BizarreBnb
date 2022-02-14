@@ -11,6 +11,7 @@ const UPDATE = "listings/UPDATE";
 const DELETE = "listings/DELETE";
 const ADD_REVIEW = "listings/ADD_REVIEW";
 const DELETE_REVIEW = "listings/DELETE_REVIEW";
+const EDIT_REVIEW = "listings/EDIT_REVIEW";
 
 // todo ——————————————————————————————————————————————————————————————————————————————————
 // todo                                 Action Creators
@@ -48,6 +49,11 @@ const createOneReview = (review) => ({
 
 const deleteOneReview = (review) => ({
   type: DELETE_REVIEW,
+  review,
+});
+
+const editOneReview = (review) => ({
+  type: EDIT_REVIEW,
   review,
 });
 
@@ -143,7 +149,7 @@ export const createReview = (review) => async (dispatch) => {
 };
 
 export const deleteReview = (review) => async (dispatch) => {
-  const response = csrfFetch(
+  const response = await csrfFetch(
     `/api/listings/${review.listingId}/reviews/${review.id}`,
     {
       method: "DELETE",
@@ -151,11 +157,27 @@ export const deleteReview = (review) => async (dispatch) => {
       body: JSON.stringify(review),
     }
   );
-
   if (response.ok) {
     const deletedReview = await response.json();
     dispatch(deleteOneReview(deletedReview));
     return deletedReview;
+  }
+};
+
+export const editReview = (review) => async (dispatch) => {
+  const response = await csrfFetch(
+    `/api/listings/${review.listingId}/reviews/${review.id}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(review),
+    }
+  );
+
+  if (response.ok) {
+    const editedReview = await response.json();
+    dispatch(editOneReview(editedReview));
+    return editedReview;
   }
 };
 
@@ -234,17 +256,31 @@ const listingsReducer = (state = initialState, action) => {
         ...state,
         list: [...state.list],
       };
-      newState.list[2].push(action.review);
+
+      newState.list[2].unshift(action.review);
+
       return newState;
     }
 
     case DELETE_REVIEW: {
       const newState = {
         ...state,
-        list: [...state.list],
       };
+      const updatedReviews = newState.list[2].filter(
+        (review) => review.id !== action.review.id
+      );
+      newState.list[2] = updatedReviews;
+      return newState;
+    }
 
-      newState.list[0] = action.review;
+    case EDIT_REVIEW: {
+      const newState = { ...state };
+
+      const updatedReviews = newState.list[2].map((review) =>
+        review.id === action.review.id ? (review = action.review) : review
+      );
+
+      newState.list[2] = updatedReviews;
       return newState;
     }
 

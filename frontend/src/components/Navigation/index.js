@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import * as sessionActions from "../../store/session";
 import "./Navigation.css";
+import LoginFormModal from "../LoginFormModal";
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
@@ -31,11 +32,19 @@ function Navigation({ isLoaded }) {
         </div>
         <div className="demo-dropdown-holder">
           {!sessionUser && (
-            <button className="demo-button" onClick={handleClick}>
-              Demo Login
-            </button>
+            <div className="noauth-user-links">
+              <NavLink className="demo-button" to="/signup">
+                Sign Up
+              </NavLink>
+              <button className="demo-button" onClick={handleClick}>
+                Demo Login
+              </button>
+              <LoginFormModal />
+            </div>
           )}
-
+          {sessionUser && (
+            <div className="user-greeting">Hi, {sessionUser?.firstName}</div>
+          )}
           <ul className="nav-dropdown">
             <li>{isLoaded && sessionLinks}</li>
           </ul>
