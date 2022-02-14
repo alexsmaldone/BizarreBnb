@@ -191,6 +191,42 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          listingId: 11,
+          url: "https://a0.muscache.com/im/pictures/23bbe1c1-1744-4dd5-922a-e100de40e723.jpg?im_w=1200",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          listingId: 11,
+          url: "https://a0.muscache.com/im/pictures/e17989ce-de0d-4df8-8112-177c35d61877.jpg?im_w=720",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          listingId: 11,
+          url: "https://a0.muscache.com/im/pictures/93718fd2-e632-4c0b-bde3-aa84a179ca71.jpg?im_w=720",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          listingId: 12,
+          url: "https://a0.muscache.com/im/pictures/76b822fa-d2da-4f39-a02c-25d2c5faf6fb.jpg?im_w=1200",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          listingId: 12,
+          url: "https://a0.muscache.com/im/pictures/e50677c2-9378-418f-9c5d-d5012e185f92.jpg?im_w=720",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          listingId: 12,
+          url: "https://a0.muscache.com/im/pictures/fd468952-834f-45f7-91d1-2cdbcb233458.jpg?im_w=720",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );
