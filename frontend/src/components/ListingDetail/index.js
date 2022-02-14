@@ -89,7 +89,9 @@ const ListingDetail = () => {
         </div>
         <div className="border-top"> </div>
         <h2>Reviews</h2>
-        {sessionUser?.id && <ReviewForm listingId={listingId} />}
+        {sessionUser?.id && sessionUser?.id !== listing?.userId && (
+          <ReviewForm listingId={listingId} />
+        )}
         <div className="reviews-container">
           {reviews?.length ? (
             <>
