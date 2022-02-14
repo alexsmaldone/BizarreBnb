@@ -59,9 +59,3 @@ npm start
 
 You are all set. You can use the Demo user or create an account to start using BizarreBnB.
 
-
-## Development
-
-## Main Features
-
-## Challenges (put examples of code)
