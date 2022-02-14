@@ -15,6 +15,10 @@
   text-align: center;
 }
 
+.login-form label {
+  font-weight: bold;
+}
+
 .login-form input {
   margin-top: 5px;
 }
