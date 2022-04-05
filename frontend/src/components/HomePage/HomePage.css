@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.splash-top {
+  position: relative;
+}
+
 #splash-page-img {
   object-fit: cover;
   width: 100%;
