@@ -15,6 +15,36 @@ Browse live link to **BizarreBnB** [here](https://bizarrebnb.herokuapp.com/).
 * Git
 * Heroku
 
+## Select Features / Pages
+
+### Home/Splash Page
+![image](https://user-images.githubusercontent.com/76414535/163684518-fab12392-ec8f-45c6-b2bd-c43dfa451860.png)
+
+### Browse Bizarre Bookings
+![image](https://user-images.githubusercontent.com/76414535/163684541-931a612d-3cf6-4704-b6c6-5d19f805b3b1.png)
+
+### Bizarre Booking Detail Page
+![image](https://user-images.githubusercontent.com/76414535/163684561-a94dea69-48b2-4003-ace9-c52656a62fff.png)
+
+### Bizarre Booking Create Form
+![image](https://user-images.githubusercontent.com/76414535/163684586-8d0ae4f3-125e-435f-8bd7-35f1bb960307.png)
+
+### View Your Listings
+![image](https://user-images.githubusercontent.com/76414535/163684718-6ee4a570-62a6-42d3-aedf-98ba396d4e4f.png)
+
+### Edit Your Listing
+![image](https://user-images.githubusercontent.com/76414535/163684608-24d0b9df-9a3d-458a-a038-8bf3cb8e0e6f.png)
+
+### Delete Listing
+![image](https://user-images.githubusercontent.com/76414535/163684642-63f4ea75-7e84-4824-b7cd-102ce9603904.png)
+
+### Review a Listing
+![image](https://user-images.githubusercontent.com/76414535/163684661-bec8b639-ed86-4e40-ad83-c6732c2385d4.png)
+
+### Edit/Delete Your Review
+![image](https://user-images.githubusercontent.com/76414535/163684689-2615253f-eb21-4665-97d4-e050875abfb5.png)
+
+
 ## Installation on your local machine
 1. To be able to install BizarreBnB on your local machine, please clone this project repository. 
 ```
